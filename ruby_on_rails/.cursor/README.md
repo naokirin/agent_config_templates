@@ -8,6 +8,7 @@ This directory is a Cursor configuration template based on the Ruby Style Guide,
 - **Rails** 7.0+ (Hotwire rules assume Rails 7+ with Turbo/Stimulus)
 - **RuboCop** (optional but recommended): `rubocop`, `rubocop-rails`, `rubocop-rspec` in `Gemfile`
 - **Brakeman** (optional): for the `/run-brakeman` security scan command
+- **bundler-audit** (optional): for the `/run-bundler-audit` dependency vulnerability scan
 - **RSpec** or **Minitest**: rules and agents support both; RSpec-specific rules apply only to `*_spec.rb` files
 
 ## Structure
@@ -49,6 +50,7 @@ This directory is a Cursor configuration template based on the Ruby Style Guide,
 - `/code-review-rails` — Review Rails code for style, security, and maintainability (delegates to **rails-code-reviewer** agent).
 - `/run-rubocop` — Run RuboCop and fix offenses (auto or manual).
 - `/run-brakeman` — Run Brakeman security scan and review warnings.
+- `/run-bundler-audit` — Scan gem dependencies for known vulnerabilities.
 
 ## Agents (subagents)
 
