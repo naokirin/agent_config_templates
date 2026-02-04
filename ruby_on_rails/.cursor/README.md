@@ -2,6 +2,14 @@
 
 This directory is a Cursor configuration template based on the Ruby Style Guide, Rails Style Guide, RSpec Style Guide, and Rails Guides. Copy it as `.cursor` at the root of a Rails project to use it.
 
+## Prerequisites
+
+- **Ruby** 3.1+
+- **Rails** 7.0+ (Hotwire rules assume Rails 7+ with Turbo/Stimulus)
+- **RuboCop** (optional but recommended): `rubocop`, `rubocop-rails`, `rubocop-rspec` in `Gemfile`
+- **Brakeman** (optional): for the `/run-brakeman` security scan command
+- **RSpec** or **Minitest**: rules and agents support both; RSpec-specific rules apply only to `*_spec.rb` files
+
 ## Structure
 
 | Directory / file | Description |
@@ -32,6 +40,7 @@ This directory is a Cursor configuration template based on the Ruby Style Guide,
 - **rails-style.mdc**: Rails conventions for `app/**`, `config/**`, `db/**`, etc.
 - **rspec-style.mdc**: RSpec layout and structure for `**/*_spec.rb`, `spec/**`.
 - **erb-style.mdc**: ERB template conventions for `**/*.erb`.
+- **hotwire-style.mdc**: Turbo and Stimulus conventions for `app/javascript/**`, `**/*.turbo_stream.erb`.
 
 ## Commands
 
