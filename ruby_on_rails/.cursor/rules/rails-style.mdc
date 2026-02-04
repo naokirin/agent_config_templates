@@ -1,5 +1,5 @@
 ---
-description: Rails conventions for routing, controllers, models, migrations, jobs, mailers, and concerns
+description: Rails conventions for routing, controllers, models, migrations, jobs, mailers, concerns, and i18n
 globs: "app/**/*.rb,**/routes.rb,config/**/*.rb,db/**/*.rb"
 alwaysApply: false
 ---
@@ -14,3 +14,4 @@ alwaysApply: false
 - **Concerns**: Use `ActiveSupport::Concern` for shared model/controller logic. Keep each concern focused on a single responsibility. Place in `app/models/concerns/` or `app/controllers/concerns/`.
 - **Active Job**: Keep `perform` idempotent (safe to retry). Use `retry_on` / `discard_on` for error handling. Prefer keyword arguments for clarity. Set the queue name explicitly (`queue_as`).
 - **Action Mailer**: Use the mailer only for building the email; keep business logic outside. Name methods after the notification (e.g. `welcome_email`). Use `deliver_later` over `deliver_now` for non-blocking delivery. Provide both HTML and text templates.
+- **I18n**: Use `t()` (or `I18n.t`) and `l()` for all user-facing strings; avoid hard-coded text in views, models, and flash messages. Organize locale files under `config/locales/` by model or feature (e.g. `config/locales/models/user.en.yml`). Use lazy lookup in views (`t('.title')`) where possible.
