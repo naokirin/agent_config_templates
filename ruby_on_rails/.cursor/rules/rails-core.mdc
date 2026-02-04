@@ -5,7 +5,34 @@ alwaysApply: true
 
 # Ruby on Rails Project
 
+## Principles
+
+- **Convention over Configuration**: Follow Rails conventions for file placement, naming, and structure. Do not invent custom patterns when Rails provides a standard way.
+- **DRY**: Extract shared logic into concerns, helpers, services, or base classes. Avoid copy-pasting code across controllers or models.
+- **Fat Model, Skinny Controller**: Keep business logic in models (or service objects); controllers should only coordinate request/response flow.
+
+## Standard Directory Layout
+
+| Directory | Purpose |
+|-----------|---------|
+| `app/models/` | ActiveRecord models and concerns |
+| `app/controllers/` | Request handling; keep actions thin |
+| `app/views/` | ERB/HTML templates and partials |
+| `app/helpers/` | View helper methods |
+| `app/services/` | Service objects for complex business logic |
+| `app/jobs/` | Active Job classes for async processing |
+| `app/mailers/` | Action Mailer classes |
+| `config/routes.rb` | Route definitions |
+| `db/migrate/` | Database migrations |
+| `spec/` or `test/` | Test suite |
+
+## Style and Linting
+
 - **Style**: Follow [Ruby Style Guide](https://rubystyle.guide), [Rails Style Guide](https://rails.rubystyle.guide), and [RSpec Style Guide](https://rspec.rubystyle.guide).
-- **Linter**: Use RuboCop (`rubocop`, `rubocop-rails`, `rubocop-rspec`) to enforce style.
+- **Linter**: Use RuboCop (`rubocop`, `rubocop-rails`, `rubocop-rspec`) to enforce style. Run before committing.
 - **Tests**: Follow RSpec conventions when using RSpec; for Minitest use `test/` and the Rails Testing Guide.
-- **Reference**: See [Rails Guides](https://guides.rubyonrails.org) for implementation details.
+
+## Reference
+
+- [Rails Guides](https://guides.rubyonrails.org) for implementation details.
+- [Rails API docs](https://api.rubyonrails.org) for class and method references.
