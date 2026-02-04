@@ -1,3 +1,8 @@
+---
+description: Scan gem dependencies for known vulnerabilities
+disable-model-invocation: true
+---
+
 # Run Bundler Audit
 
 Scan gem dependencies for known security vulnerabilities: $ARGUMENTS

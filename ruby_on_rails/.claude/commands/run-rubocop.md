@@ -1,3 +1,9 @@
+---
+description: Run RuboCop and fix offenses
+disable-model-invocation: true
+argument-hint: "[file or directory]"
+---
+
 # Run RuboCop and Fix Offenses
 
 Run RuboCop and fix offenses: $ARGUMENTS

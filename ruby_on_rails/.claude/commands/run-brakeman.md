@@ -1,3 +1,9 @@
+---
+description: Run Brakeman security scan and review warnings
+disable-model-invocation: true
+argument-hint: "[--only-files path]"
+---
+
 # Run Brakeman Security Scan
 
 Run Brakeman and review security warnings: $ARGUMENTS

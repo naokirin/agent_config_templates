@@ -1,3 +1,9 @@
+---
+description: Generate and edit a Rails migration
+disable-model-invocation: true
+argument-hint: "<description of the change>"
+---
+
 # Generate Migration
 
 Generate a Rails migration based on the user's description: $ARGUMENTS

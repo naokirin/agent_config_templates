@@ -1,3 +1,10 @@
+---
+description: Run tests and fix failures (RSpec or Minitest)
+context: fork
+agent: rails-tester
+argument-hint: "[file or directory]"
+---
+
 # Run Tests and Fix Failures
 
 Run the project test suite and fix any failures.
