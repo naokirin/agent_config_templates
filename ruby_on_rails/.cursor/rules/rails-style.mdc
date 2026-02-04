@@ -1,5 +1,5 @@
 ---
-description: Rails conventions for routing, controllers, models, and migrations
+description: Rails conventions for routing, controllers, models, migrations, jobs, mailers, and concerns
 globs: "app/**/*.rb,**/routes.rb,config/**/*.rb,db/**/*.rb"
 alwaysApply: false
 ---
@@ -11,3 +11,6 @@ alwaysApply: false
 - **Models**: Group macros (`has_many`, `validates`, `enum`, etc.) at the top. Prefer `has_many :through` over `has_and_belongs_to_many`. Use hash syntax for `enum` with explicit values. Use new-style validations (`validates :email, presence: true`). Use `create!` / `save!` or check return value for persistence.
 - **Queries**: Avoid string interpolation; use placeholders or hash conditions. Use `find` (by id), `find_by` (by attributes), `where` / `where.not` (hash). Use `find_each` for large sets. Use `pluck` / `pick` / `ids` where appropriate. Use symbol arguments for `order` (e.g. `order(created_at: :desc)`).
 - **Migrations**: Prefer `change`. Add `default` and `null: false` for booleans. Use `foreign_key: true` for references. Initialize empty DB with `db:schema:load`.
+- **Concerns**: Use `ActiveSupport::Concern` for shared model/controller logic. Keep each concern focused on a single responsibility. Place in `app/models/concerns/` or `app/controllers/concerns/`.
+- **Active Job**: Keep `perform` idempotent (safe to retry). Use `retry_on` / `discard_on` for error handling. Prefer keyword arguments for clarity. Set the queue name explicitly (`queue_as`).
+- **Action Mailer**: Use the mailer only for building the email; keep business logic outside. Name methods after the notification (e.g. `welcome_email`). Use `deliver_later` over `deliver_now` for non-blocking delivery. Provide both HTML and text templates.
