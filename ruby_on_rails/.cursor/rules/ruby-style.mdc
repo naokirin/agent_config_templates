@@ -15,3 +15,7 @@ alwaysApply: false
 - Prefer single-quoted strings; use double quotes only when interpolation or `\` is needed.
 - Use `&&` / `||` instead of `and` / `or`. No space after `!`.
 - Avoid long `&.` chains; consider delegation or explicit nil checks.
+- `# frozen_string_literal: true` magic comment: required on Ruby < 3.4 (all strings frozen by default from Ruby 3.4+). On Ruby 3.4+ the comment is optional but harmless.
+- Use `%w[]` for word arrays and `%i[]` for symbol arrays instead of literal arrays of strings/symbols.
+- Use `do...end` for multi-line blocks; use `{ ... }` for single-line blocks and method chains.
+- Group method visibility: place `private` / `protected` once, then list all private/protected methods below. Do not sprinkle `private` before each method.
