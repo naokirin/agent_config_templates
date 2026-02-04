@@ -1,0 +1,11 @@
+---
+description: Ruby on Rails project defaults and reference guides
+alwaysApply: true
+---
+
+# Ruby on Rails Project
+
+- **Style**: Follow [Ruby Style Guide](https://rubystyle.guide), [Rails Style Guide](https://rails.rubystyle.guide), and [RSpec Style Guide](https://rspec.rubystyle.guide).
+- **Linter**: Use RuboCop (`rubocop`, `rubocop-rails`, `rubocop-rspec`) to enforce style.
+- **Tests**: Follow RSpec conventions when using RSpec; for Minitest use `test/` and the Rails Testing Guide.
+- **Reference**: See [Rails Guides](https://guides.rubyonrails.org) for implementation details.

@@ -1,0 +1,13 @@
+---
+description: Rails conventions for routing, controllers, models, and migrations
+globs: "app/**/*.rb,**/routes.rb,config/**/*.rb,db/**/*.rb"
+alwaysApply: false
+---
+
+# Rails Style
+
+- **Routing**: Prefer `resources`. Use `member` / `collection` for extra actions. Nest at most one level; use `shallow: true` when deeper. Use `match` only when mapping multiple HTTP verbs to one action.
+- **Controllers**: Keep them skinny. Move business logic to models. One method call per action besides find/new. Minimize instance variables. Prefer `render plain:` over `render text:`. Use symbol HTTP status (e.g. `:forbidden`).
+- **Models**: Group macros (`has_many`, `validates`, `enum`, etc.) at the top. Prefer `has_many :through` over `has_and_belongs_to_many`. Use hash syntax for `enum` with explicit values. Use new-style validations (`validates :email, presence: true`). Use `create!` / `save!` or check return value for persistence.
+- **Queries**: Avoid string interpolation; use placeholders or hash conditions. Use `find` (by id), `find_by` (by attributes), `where` / `where.not` (hash). Use `find_each` for large sets. Use `pluck` / `pick` / `ids` where appropriate. Use symbol arguments for `order` (e.g. `order(created_at: :desc)`).
+- **Migrations**: Prefer `change`. Add `default` and `null: false` for booleans. Use `foreign_key: true` for references. Initialize empty DB with `db:schema:load`.
