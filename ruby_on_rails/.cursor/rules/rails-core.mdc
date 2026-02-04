@@ -22,6 +22,8 @@ alwaysApply: true
 | `app/services/` | Service objects for complex business logic |
 | `app/jobs/` | Active Job classes for async processing |
 | `app/mailers/` | Action Mailer classes |
+| `app/channels/` | Action Cable channels for WebSocket |
+| `app/javascript/controllers/` | Stimulus controllers (Rails 7+) |
 | `config/routes.rb` | Route definitions |
 | `db/migrate/` | Database migrations |
 | `spec/` or `test/` | Test suite |
