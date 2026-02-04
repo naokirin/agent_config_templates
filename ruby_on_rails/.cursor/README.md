@@ -27,10 +27,11 @@ This directory is a Cursor configuration template based on the Ruby Style Guide,
 
 ## Rules
 
-- **rails-core.mdc** (alwaysApply): Project-wide style policy and reference links.
+- **rails-core.mdc** (alwaysApply): Project-wide principles, directory layout, style policy, and reference links.
 - **ruby-style.mdc**: Ruby style for `**/*.rb`.
 - **rails-style.mdc**: Rails conventions for `app/**`, `config/**`, `db/**`, etc.
 - **rspec-style.mdc**: RSpec layout and structure for `**/*_spec.rb`, `spec/**`.
+- **erb-style.mdc**: ERB template conventions for `**/*.erb`.
 
 ## Commands
 
@@ -38,6 +39,7 @@ This directory is a Cursor configuration template based on the Ruby Style Guide,
 - `/generate-migration` — Guide for generating and editing migrations.
 - `/code-review-rails` — Review Rails code for style, security, and maintainability (delegates to **rails-code-reviewer** agent).
 - `/run-rubocop` — Run RuboCop and fix offenses (auto or manual).
+- `/run-brakeman` — Run Brakeman security scan and review warnings.
 
 ## Agents (subagents)
 
