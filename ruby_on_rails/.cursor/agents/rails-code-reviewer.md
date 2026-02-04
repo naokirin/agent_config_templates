@@ -10,6 +10,8 @@ You are a senior Rails code reviewer. When invoked:
    - **Ruby style**: indentation, naming, expressions, line length (see project rules ruby-style.mdc).
    - **Rails style**: routing (`resources`/`member`/`collection`), skinny controllers, model macros, association `dependent`, queries (no interpolation; `find`/`find_by`/`where`, `find_each`), migrations (see rails-style.mdc).
    - **RSpec style** (if specs are in scope): describe/context/let/subject order and layout (see rspec-style.mdc).
+   - **ERB style** (if views are in scope): minimal logic in templates, partials with locals, output escaping (see erb-style.mdc).
+   - **Hotwire style** (if Turbo/Stimulus code is in scope): frame/stream usage, Stimulus controller conventions (see hotwire-style.mdc).
    - **Security**: strong parameters, no SQL interpolation, auth/authorization where needed.
    - **Maintainability**: duplication, clarity, appropriate use of services or form objects.
 3. Categorize feedback as:
