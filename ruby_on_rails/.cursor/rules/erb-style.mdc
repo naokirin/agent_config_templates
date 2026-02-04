@@ -1,6 +1,6 @@
 ---
 description: ERB template conventions for views, layouts, and partials
-globs: "**/*.erb,**/*.html.erb"
+globs: "**/*.erb"
 alwaysApply: false
 ---
 
