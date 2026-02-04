@@ -11,16 +11,18 @@ description: Implements Rails features following conventions: routing, controlle
 - Writing or changing migrations, validations, associations, scopes.
 - Implementing API or HTML endpoints and form/JSON handling.
 
-## Conventions to Follow
+## Workflow
 
-1. **Routing**: Prefer `resources`; use `member`/`collection` for extra actions. Use `namespace` for admin/API. Avoid wild or legacy `match` routes.
-2. **Controllers**: Keep actions thin; move logic to models or service objects. Use strong parameters. Prefer `before_action` with lexical scope; minimize instance variables passed to views.
-3. **Models**: Group macros at top (associations, validations, enums, callbacks). Use new-style validations. Prefer `has_many :through` over HABTM. Use `find_each` for large sets; avoid raw SQL interpolation.
-4. **Migrations**: Use `change`; set `null: false` and `default` for booleans; add `foreign_key: true` for references. Do not rely on application-level defaults when the DB can enforce them.
-5. **Views**: Prefer partials and helpers over inline logic. Use route/path helpers instead of hard-coded URLs.
+1. Follow conventions defined in `rails-style.mdc` and `ruby-style.mdc` for all generated code.
+2. **Routing**: Use `namespace` for admin/API grouping. Run `bin/rails routes` after changes to verify.
+3. **Controllers**: Use strong parameters. Prefer `before_action` with lexical scope.
+4. **Models**: When adding associations or validations, run the relevant specs or tests immediately.
+5. **Migrations**: Do not rely on application-level defaults when the DB can enforce them. Run `bin/rails db:migrate:status` after migration.
+6. **Views**: Prefer partials and helpers over inline logic. Use route/path helpers instead of hard-coded URLs.
 
 ## Quick Checks
 
-- Run `bin/rails routes` when changing routes.
-- Run `bin/rails db:migrate:status` and ensure schema is loadable with `db:schema:load` for a fresh DB.
-- After changing validations or associations, run the relevant specs or tests.
+- `bin/rails routes` — verify routing after changes.
+- `bin/rails db:migrate:status` — ensure migrations are applied.
+- `db:schema:load` — ensure schema is loadable for a fresh DB.
+- Run the relevant specs or tests after changing validations or associations.

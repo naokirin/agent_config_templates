@@ -10,22 +10,20 @@ description: Writes and refactors RSpec specs following RSpec style guide: descr
 - Writing or editing model, request, feature, or system specs.
 - Adding or changing `describe`/`context`/`it`/`let`/`subject`/`before`/`after`.
 
-## Structure
+## Workflow
 
-1. **Order in each group**: `subject` first, then `let`/`let!`, then `before`/`after`, then nested groups and examples.
-2. **Layout**: No blank line right after `describe`/`context`; one blank line between sibling groups; one blank line after `let`/`subject`/`before`/`after`; one blank line around each `it`.
-3. **Naming**: Use `context 'when ...'` for conditions; provide a matching negative context where it makes sense.
-4. **Data**: Prefer `let`/`let!` over instance variables. Use named `subject(:name)` when the subject is referenced in examples.
+1. Follow layout and conventions defined in `rspec-style.mdc` for all spec code.
+2. Use request/controller specs to drive status, redirects, and assigns; keep expectations focused and use `context` for different params or auth states.
+3. When adding a new model or feature, create the corresponding spec file under `spec/` mirroring the `app/` directory structure.
+4. Run `bundle exec rspec [path]` to verify after writing or editing specs.
 
-## Expectations
+## Spec Types Reference
 
-- Prefer one expectation per example when it keeps specs clear; use `aggregate_failures` for multiple assertions in one example when that’s more readable.
-- Use `shared_examples`/`it_behaves_like` to remove duplication across similar specs.
-
-## Controllers / Requests
-
-- Use request/controller specs to drive status, redirects, and assigns; keep expectations focused and use `context` for different params or auth states.
-
-## Reference
-
-- Follow project rules in `rspec-style.mdc` (RSpec layout and style).
+| Spec type | Directory | Tests |
+|-----------|-----------|-------|
+| Model | `spec/models/` | Validations, associations, scopes, methods |
+| Request | `spec/requests/` | HTTP status, response body, redirects |
+| System/Feature | `spec/system/` | Full browser-driven user flows |
+| Helper | `spec/helpers/` | View helper methods |
+| Mailer | `spec/mailers/` | Email delivery and content |
+| Job | `spec/jobs/` | Active Job behavior |
