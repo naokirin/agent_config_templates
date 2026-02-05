@@ -7,6 +7,7 @@ This directory is a Cursor configuration template based on Rust idioms, design p
 - **Rust** (rustc, cargo): Install via [rustup](https://rustup.rs).
 - **rustfmt**: Included with rustup; used by the format hook and run-rustfmt command.
 - **Clippy** (optional but recommended): `rustup component add clippy`; used by the run-clippy command.
+- **jq** or **python3** (optional): Used by the format hook to parse JSON. If neither is available, the hook skips formatting.
 
 ## Structure
 
@@ -52,7 +53,7 @@ This directory is a Cursor configuration template based on Rust idioms, design p
 
 ## Hooks
 
-- **afterFileEdit**: Runs `format-rust.sh` after editing `.rs` files. If `rustfmt` is available, formats the edited file. If not installed, the script exits successfully and does nothing.
+- **afterFileEdit**: Runs `format-rust.sh` after editing `.rs` files. The script uses `jq` (preferred) or `python3` (fallback) to parse JSON input. If `rustfmt` is available, formats the edited file. If any required tool is missing, the script exits successfully and does nothing.
 
 ## Reference
 
