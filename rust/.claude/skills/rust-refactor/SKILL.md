@@ -1,6 +1,7 @@
 ---
 name: rust-refactor
 description: Refactors Rust code for clarity and style without changing behaviour. Use when simplifying code, improving ownership/borrowing, or applying style and idiom rules.
+user-invocable: false
 ---
 
 # Rust Refactor
@@ -16,7 +17,7 @@ description: Refactors Rust code for clarity and style without changing behaviou
 
 1. **Behaviour first**: Refactors must not change observable behaviour. Rely on existing tests; add or run tests if coverage is missing.
 2. **Incremental**: Prefer small, reviewable steps (e.g. rename, extract, then move).
-3. **Conventions**: After refactor, code should align with the project's Rust rules (`.cursor/rules/` or CLAUDE.md).
+3. **Conventions**: After refactor, code should align with the project's Rust rules (CLAUDE.md or `.cursor/rules/`).
 
 ## Verification
 

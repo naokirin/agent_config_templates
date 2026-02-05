@@ -2,6 +2,8 @@
 
 This directory is a Cursor configuration template based on the Ruby Style Guide, Rails Style Guide, RSpec Style Guide, and Rails Guides. Copy it as `.cursor` at the root of a Rails project to use it.
 
+This template is provided alongside a Claude Code configuration (`.claude` + `CLAUDE.md`) in the same repo; use the one that matches your editor. Content is kept in sync where applicable.
+
 ## Prerequisites
 
 - **Ruby** 3.1+
@@ -60,3 +62,7 @@ This directory is a Cursor configuration template based on the Ruby Style Guide,
 ## Hooks
 
 - **afterFileEdit**: Runs `format-ruby.sh` after editing `.rb` files. If RuboCop is available, runs `rubocop -a` to format. If RuboCop is not installed, the script does nothing.
+
+## Verification and style
+
+After code changes, the agent should verify with tests and RuboCop (see **rails-core** rule). Style is defined in the `rules/` .mdc files and enforced by RuboCop; avoid duplicating full style guides elsewhere so the agent stays focused on principles and workflow.

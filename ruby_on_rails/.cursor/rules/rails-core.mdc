@@ -33,6 +33,11 @@ alwaysApply: true
 - **Style**: Follow [Ruby Style Guide](https://rubystyle.guide), [Rails Style Guide](https://rails.rubystyle.guide), and [RSpec Style Guide](https://rspec.rubystyle.guide).
 - **Linter**: Use RuboCop (`rubocop`, `rubocop-rails`, `rubocop-rspec`) to enforce style. Run before committing.
 - **Tests**: Follow RSpec conventions when using RSpec; for Minitest use `test/` and the Rails Testing Guide.
+- **Verification**: After code changes, run the relevant tests (`bundle exec rspec` or `bin/rails test`) and RuboCop (`bundle exec rubocop`) to confirm no regressions or new offenses.
+
+## Planning (Cursor)
+
+For large or multi-file changes, use Plan Mode to create an implementation plan and get approval before coding. This reduces wrong-direction work and keeps changes focused.
 
 ## Reference
 

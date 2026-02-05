@@ -2,6 +2,8 @@
 
 This directory is a Claude Code configuration template based on the Ruby Style Guide, Rails Style Guide, RSpec Style Guide, and Rails Guides. Copy it along with `CLAUDE.md` to the root of a Rails project to use it.
 
+This template is provided alongside a Cursor configuration (`.cursor`) in the same repo; use the one that matches your editor. Content is kept in sync where applicable.
+
 ## Prerequisites
 
 - **Ruby** 3.1+
@@ -81,15 +83,9 @@ Skill files are in `.claude/skills/<name>/SKILL.md`. See [Skills documentation](
 
 Hook configuration is in `.claude/settings.json`. The hook script receives JSON on stdin with `tool_input.file_path`. See [Hooks documentation](https://code.claude.com/docs/hooks-guide).
 
-## CLAUDE.md Contents
+## CLAUDE.md and verification
 
-The `CLAUDE.md` file consolidates all project instructions:
-
-- **Principles**: Convention over Configuration, DRY, Fat Model / Skinny Controller
-- **Directory layout**: Standard Rails app structure
-- **Style rules**: Ruby, Rails, RSpec, ERB, Hotwire (Turbo + Stimulus)
-- **Workflows**: Rails Development, Rails Refactor, RSpec Testing
-- **Code Review Guidelines**: Checklist with Critical / Warning / Suggestion categories
+`CLAUDE.md` is kept short and focuses on principles, directory layout, style references (links + RuboCop), **verification** (run tests and RuboCop after changes), workflows, and code review categories. Detailed style lives in the linked style guides and in `.cursor/rules/` if you use Cursor too. After code changes, the agent should run tests and RuboCop to verify; use `/run-tests` and `/run-rubocop` when appropriate.
 
 ## Comparison with Cursor Configuration
 

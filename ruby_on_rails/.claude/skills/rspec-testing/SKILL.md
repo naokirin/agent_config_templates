@@ -13,7 +13,7 @@ user-invocable: false
 
 ## Workflow
 
-1. Follow layout and conventions defined in CLAUDE.md (RSpec Style section) for all spec code.
+1. Follow the project's RSpec style rules (`.cursor/rules/rspec-style.mdc` or CLAUDE.md) for all spec code.
 2. Use request/controller specs to drive status, redirects, and assigns; keep expectations focused and use `context` for different params or auth states.
 3. When adding a new model or feature, create the corresponding spec file under `spec/` mirroring the `app/` directory structure.
 4. Run `bundle exec rspec [path]` to verify after writing or editing specs.

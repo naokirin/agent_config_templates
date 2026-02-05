@@ -9,14 +9,14 @@ description: Refactors Rails code for clarity and style without changing behavio
 
 - Simplifying controllers (moving logic to models or services).
 - Replacing deprecated or verbose patterns (e.g. old validations, raw SQL, N+1).
-- Applying Ruby/Rails/RSpec style (see `ruby-style.mdc`, `rails-style.mdc`, `rspec-style.mdc`).
+- Applying Ruby/Rails/RSpec style (see project rules in `.cursor/rules/` or CLAUDE.md).
 - Extracting service objects or form objects.
 
 ## Principles
 
 1. **Behavior first**: Refactors must not change observable behavior. Rely on existing tests; add or run specs if coverage is missing.
 2. **Incremental**: Prefer small, reviewable steps (e.g. rename, extract method, then move).
-3. **Conventions**: After refactor, code should align with the project rules (`ruby-style.mdc`, `rails-style.mdc`, `rspec-style.mdc`).
+3. **Conventions**: After refactor, code should align with the project's Ruby/Rails/RSpec style rules (`.cursor/rules/` or CLAUDE.md).
 
 ## Verification
 

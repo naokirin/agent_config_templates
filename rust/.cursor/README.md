@@ -2,6 +2,8 @@
 
 This directory is a Cursor configuration template based on Rust idioms, design patterns, anti-patterns, and rust-best-practices (e.g. naming, code, error, and import discipline). Copy it as `.cursor` at the root of a Rust project to use it.
 
+This template is provided alongside a Claude Code configuration (`.claude` + `CLAUDE.md`) in the same repo; use the one that matches your editor. Content is kept in sync where applicable.
+
 ## Prerequisites
 
 - **Rust** (rustc, cargo): Install via [rustup](https://rustup.rs).
@@ -54,6 +56,10 @@ This directory is a Cursor configuration template based on Rust idioms, design p
 ## Hooks
 
 - **afterFileEdit**: Runs `format-rust.sh` after editing `.rs` files. The script uses `jq` (preferred) or `python3` (fallback) to parse JSON input. If `rustfmt` is available, formats the edited file. If any required tool is missing, the script exits successfully and does nothing.
+
+## Verification and style
+
+After code changes, the agent should verify with `cargo test` and `cargo clippy` (see **rust-core** rule). Style and idioms are defined in the `rules/` .mdc files and enforced by rustfmt and Clippy; keep instructions focused on principles and workflow so the agent stays effective.
 
 ## Reference
 

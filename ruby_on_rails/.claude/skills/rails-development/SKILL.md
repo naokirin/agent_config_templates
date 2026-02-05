@@ -14,7 +14,7 @@ user-invocable: false
 
 ## Workflow
 
-1. Follow conventions defined in CLAUDE.md (Rails Style, Ruby Style sections) for all generated code.
+1. Follow the project's Ruby/Rails style rules (`.cursor/rules/` .mdc files or CLAUDE.md instructions) for all generated code.
 2. **Routing**: Use `namespace` for admin/API grouping. Run `bin/rails routes` after changes to verify.
 3. **Controllers**: Use strong parameters. Prefer `before_action` with lexical scope.
 4. **Models**: When adding associations or validations, run the relevant specs or tests immediately.
