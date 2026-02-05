@@ -1,0 +1,35 @@
+---
+description: Rust project defaults, layout, and reference guides
+alwaysApply: true
+---
+
+# Rust Project
+
+## Principles
+
+- **Idiomatic Rust**: Prefer standard idioms (borrowed types for args, `format!` for strings, constructors, `Default`, `mem::take`/`replace`, pattern matching). Keep code readable for Rust developers.
+- **Ownership and Borrowing**: Avoid unnecessary clones to satisfy the borrow checker; prefer `mem::take`/`replace`, restructuring, or `Rc`/`Arc` where appropriate. Do not use `#[deny(warnings)]` at crate root; use explicit lints or `RUSTFLAGS="-D warnings"` in CI if needed.
+- **Error Handling**: Use concrete error types (e.g. `thiserror`) in libraries; convert dependency errors at boundaries. Prefer `?` and `Result` over `.unwrap()` except in tests or tiny scopes with programmer-only failure (e.g. `Regex::new("...").unwrap()`).
+
+## Standard Layout
+
+| Path | Purpose |
+|------|---------|
+| `src/lib.rs` | Library root; re-exports, crate-level docs |
+| `src/main.rs` | Binary entrypoint |
+| `src/**/*.rs` | Modules and submodules |
+| `tests/` | Integration tests |
+| `benches/` | Benchmarks |
+| `Cargo.toml` | Manifest (dependencies, features, profile) |
+
+## Tooling
+
+- **Format**: Use `rustfmt` (default config or `rustfmt.toml`). Run before committing.
+- **Lint**: Use `cargo clippy` for additional lints. Fix or allow with justification.
+- **Tests**: `cargo test` for unit and integration tests; keep tests close to code or in `tests/`.
+
+## Reference
+
+- [The Rust Book](https://doc.rust-lang.org/book/)
+- [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
+- [Rust by Example](https://doc.rust-lang.org/rust-by-example/)

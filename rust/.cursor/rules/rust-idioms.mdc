@@ -1,0 +1,21 @@
+---
+description: Rust idioms (arguments, strings, constructors, Default, Option, closures, etc.)
+globs: "**/*.rs"
+alwaysApply: false
+---
+
+# Rust Idioms
+
+- **Arguments**: Prefer borrowed types for arguments—e.g. `&str` instead of `&String`, `&[T]` or `&Vec<T>` for slices. Use `impl AsRef<Path>` for path-like args where appropriate.
+- **String building**: Use `format!()` for concatenating strings; avoid repeated `push_str` or `+` when a single expression is clearer.
+- **Constructors**: Use associated functions like `new`, `new_with_foo` for construction; keep constructors consistent across the crate.
+- **Default**: Implement `Default` where a canonical default exists; use it for optional config or struct population.
+- **Option/Result**: Prefer `if let Some(x) = opt` and `match` over `.unwrap()` in production. Use `.ok_or()`/`.ok_or_else()` when propagating `Option` as `Result`. Iterate over `Option` with `.into_iter()` when treating it as 0-or-1 element.
+- **Closures**: Pass variables into closures explicitly (e.g. by parameter) when you need to move or copy; avoid unnecessary captures that complicate lifetimes.
+- **Destructors**: Use `Drop` for cleanup (RAII); keep finalisation in destructors and avoid heavy work in `drop` where possible.
+- **Mutability**: Use `mem::take` or `mem::replace` when you need to take ownership from behind a reference (e.g. in enums or struct fields) instead of cloning just to satisfy the borrow checker.
+- **Dynamic dispatch**: Prefer `dyn Trait` on the stack (e.g. local variable) when you need dynamic dispatch in a narrow scope; use `Box<dyn Trait>` when storing or returning.
+- **Privacy**: Use `pub(crate)` or private modules for extensibility without exposing internals.
+- **Doc init**: Use `#` in doc examples to hide setup (e.g. `# let x = 0;`) so examples stay readable.
+- **Temporary mutability**: Restrict `let mut` to the smallest scope; rebind as immutable after construction when possible.
+- **Error handling**: When a function consumes an argument and returns an error, consider returning the consumed argument in the error so the caller can retry or recover (return consumed arg on error idiom).

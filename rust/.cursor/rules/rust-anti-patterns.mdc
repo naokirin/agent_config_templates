@@ -1,0 +1,11 @@
+---
+description: Rust anti-patterns to avoid (clone for borrow checker, deny(warnings), Deref polymorphism)
+globs: "**/*.rs"
+alwaysApply: false
+---
+
+# Rust Anti-patterns
+
+- **Clone to satisfy the borrow checker**: Do not add `.clone()` only to silence borrow checker errors. Cloning duplicates data and changes are not synced. Prefer: restructuring code, `mem::take`/`mem::replace`, or `Rc`/`Arc` when shared ownership is intended. Use `cargo clippy` to catch unnecessary clones. Only clone deliberately when the cost is acceptable (e.g. prototypes, readability over performance).
+- **`#![deny(warnings)]`**: Do not set this at crate root. It opts out of compiler stability: new lints or deprecations can break the build, and tools like Clippy become harder to use. Prefer: (1) `RUSTFLAGS="-D warnings"` in CI if you want build failure on warnings, or (2) explicitly `deny` specific lints in code (e.g. `bad_style`, `dead_code`, `unused`). Do not blanket-deny all warnings.
+- **Deref polymorphism**: Do not abuse `Deref` to emulate inheritance or subtyping (e.g. making `MyType` deref to `InnerType` so that `MyType` gets all of `InnerType`’s methods). `Deref` is for smart-pointer-like behaviour (e.g. `Vec` → slice, `String` → `str`). For shared behaviour use traits and composition.

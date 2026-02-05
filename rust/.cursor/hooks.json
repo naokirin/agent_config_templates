@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "hooks": {
+    "afterFileEdit": [
+      {
+        "pattern": "**/*.rs",
+        "command": ".cursor/hooks/format-rust.sh"
+      }
+    ]
+  }
+}

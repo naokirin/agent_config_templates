@@ -1,0 +1,22 @@
+---
+description: Rust style (naming, code, errors, imports, cosmetics) from rust-best-practices
+globs: "**/*.rs"
+alwaysApply: false
+---
+
+# Rust Style
+
+- **Naming**: Use UK spelling. Names should say what they mean, have consistent word order (e.g. `verb_noun`), be concise, use simple/correct words, and avoid type names in variables. Pattern-match variables: same name or first letter; use original field names in struct/enum matches. Generics: single-letter names. Lifetimes: derived from the reference (e.g. `'cursor`, `'tree`), concise, no numbers. Builder: `MyType::builder()` returning `MyTypeBuilder` with fallible `.build()`.
+- **Self**: Use `Self` in impls where possible (parameters, return types). Do not use `Self` to construct associated types; use concrete types. Exception: `Result<_, Self::Err>` with crate `Error` is fine.
+- **Struct population**: Prefer same-name field init (`field` from variable `field`). Populate in declaration order. No inline heavy computation in struct literals—use `let` and then assign. Same rule for tuples; keep them short or use `let` for parts.
+- **Collections**: Prefer `.collect()` over `Vec::from_iter(...)`. Empty vec: `Vec::new()` (or `Vec::with_capacity(n)` when size is known); avoid `vec![]` for empty.
+- **Mutability**: Scope `let mut` to the smallest block; prefer same name for outer immutable binding. Prefer functional style (e.g. `.filter().count()`) over mutable counters where clear.
+- **Control flow**: Avoid unassigned `let`; prefer returning from blocks. Store values in `let` and pass `&var` instead of `&expr` when the type is not `Copy`. Limit shadowing: one level across scopes, at most one type-changing shadow per variable; no type name shadowing.
+- **Generics**: Put all bounds in one place; if any go in `where`, put all there. If angle-bracket bounds exceed ~30 chars, use `where`. Prefer minimal type annotations: `let x: Vec<_> = ...`; prefer `let` annotations, then turbofish, then fully-qualified syntax.
+- **Drop**: Use scoped blocks `{ ... }` to drop early; avoid explicit `drop()`. In chains, use `|_| ()` to ignore a value; for `Result<()>` at end of function use `?` and `Ok(())`.
+- **Constructors**: For “object” structs, prefer constructor or builder over all-public fields. For data-transfer structs with sensible `Default`, public fields + `#[non_exhaustive]` are fine; otherwise use a builder.
+- **Format**: Inline single variables in `format!` (e.g. `format!("{path}/{file}")`). Do not call methods on closing `}`; use a `let` binding first.
+- **Imports**: No `*` from crates or preludes in production. No `*` for enum variants; use full path or `use Enum as E` in small scope. Group: (1) std/core/alloc, (2) third-party, (3) self/super/crate.
+- **Spacing**: Use blank lines to delimit strongly associated sections (e.g. declaration used only in next block: no blank line; used in multiple blocks: blank line after).
+- **Errors**: Concise messages; consistent phrasing (e.g. “cannot …”). Lowercase unless top-level only; “internal error:” for programmer faults. Prefer enumerated/concrete errors; no type-erased errors in libraries. Wrapped errors: inner in `source`, message in `reason` where applicable. Convert dependency errors at the boundary.
+- **Panic**: Only for unrecoverable state, not user input. Prefer types or `.expect("precondition")` over `.unwrap()`; in tests, `.unwrap()` is acceptable for clearer failure location.
