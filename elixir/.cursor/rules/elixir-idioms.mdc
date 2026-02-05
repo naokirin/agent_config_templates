@@ -1,0 +1,13 @@
+---
+description: Elixir idioms (pattern matching, with, OTP)
+globs: "**/*.ex"
+alwaysApply: false
+---
+
+# Elixir Idioms
+
+- **Pattern matching**: Use pattern matching in function heads and `case`/`cond` instead of many `if` branches. Match on structure (`%{key: v}`) when the shape is known; avoid matching on large maps when only one key matters.
+- **with**: Use `with` for a sequence of steps that can fail; return `{:ok, result}` or `{:error, reason}`. Use an `else` clause to handle specific error shapes when needed. Do not use `with` for a single step.
+- **Lists and maps**: Prefer `Enum` and comprehensions; use recursion only when it clarifies (e.g. building a structure). Prefer `Map.get/3` with default over `[]` when the key might be missing.
+- **OTP**: Use GenServer for mutable state; Supervisor for process trees; Application for startup. Keep GenServer callbacks thin; do work in separate functions. Use `handle_continue` for work after init when appropriate.
+- **Avoid**: Deep nesting (use `with` or extract functions); spawning one-off processes without supervision; using `Process.get/put` for state (prefer GenServer or pass state explicitly).

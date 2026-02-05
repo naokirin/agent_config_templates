@@ -1,0 +1,40 @@
+---
+description: Elixir project defaults, layout, and reference guides
+alwaysApply: true
+---
+
+# Elixir Project
+
+## Principles
+
+- **Idiomatic Elixir**: Prefer pipe `|>`, pattern matching, and immutable data. Use `with` for multi-step success/failure; avoid deep nesting. Keep functions small and single-purpose.
+- **OTP and Processes**: Use GenServer, Supervisor, and Application when state or lifecycle matter; prefer pure functions and pipelines where possible. Do not spawn processes unnecessarily.
+- **Error Handling**: Return `{:ok, result}` / `{:error, reason}` from public APIs; use `raise` only for truly exceptional cases. Let it crash in supervised trees; handle errors at boundaries.
+
+## Standard Layout
+
+| Path | Purpose |
+|------|---------|
+| `lib/` | Application and module source (`.ex`) |
+| `lib/**/*.ex` | Compiled modules |
+| `test/` | ExUnit tests (`.exs`) |
+| `mix.exs` | Project manifest (deps, project, aliases) |
+| `config/` | Runtime config (optional) |
+| `.formatter.exs` | Format options |
+
+## Tooling
+
+- **Format**: Use `mix format` (default config or `.formatter.exs`). Run before committing.
+- **Lint**: Use `mix credo` when available for additional checks. Fix or allow with justification.
+- **Tests**: `mix test` for unit and integration tests; keep tests in `test/` mirroring `lib/` structure.
+- **Verification**: After code changes, run `mix test` and `mix credo` to confirm no regressions or new warnings. Use `/run-tests` and `/run-credo` (or equivalent) when available.
+
+## Planning (Cursor)
+
+For large or multi-file changes, use Plan Mode to create an implementation plan and get approval before coding. This reduces wrong-direction work and keeps changes focused.
+
+## Reference
+
+- [Elixir Getting Started](https://elixir-lang.org/getting-started/introduction.html)
+- [Elixir Style Guide](https://hexdocs.pm/elixir/style-guide.html)
+- [Mix and OTP](https://elixir-lang.org/getting-started/mix-otp/introduction-to-mix.html)

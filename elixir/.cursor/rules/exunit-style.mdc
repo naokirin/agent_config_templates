@@ -1,0 +1,13 @@
+---
+description: ExUnit test style and structure
+globs: "test/**/*.exs"
+alwaysApply: false
+---
+
+# ExUnit Style
+
+- **File layout**: One test file per module under test, e.g. `test/lib/my_module_test.exs` for `lib/my_module.ex`. Use `*_test.exs` suffix.
+- **Structure**: Use `describe` for grouping by function or behaviour; use `test "description" do` for each case. Descriptions should read clearly: "returns :ok when valid" not "test 1".
+- **Assertions**: Prefer `assert`, `assert_raise`, `refute`; use `assert value == expected` with clear expected values. For pattern matching, `assert {:ok, x} = function()` is acceptable when the shape is the focus.
+- **Setup**: Use `setup` or `setup_all` for shared context; return a map that tests can use. Prefer tags (e.g. `@tag :integration`) for expensive or external tests; run with `mix test --only integration` when needed.
+- **Naming**: Test names should describe the scenario and expected outcome. Avoid testing implementation details; test behaviour and contracts.

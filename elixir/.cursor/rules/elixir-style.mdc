@@ -1,0 +1,15 @@
+---
+description: Elixir style (naming, modules, functions, formatting)
+globs: "**/*.ex"
+alwaysApply: false
+---
+
+# Elixir Style
+
+- **Naming**: Modules in PascalCase; functions and variables in snake_case. Use descriptive names; avoid single-letter names except in short closures or comprehensions.
+- **Modules**: One main concern per module; group related functions. Put `@moduledoc` and `@doc` for public APIs. Use `@spec` for public functions when types help.
+- **Functions**: Prefer small, pure functions. Put the main clause last in multi-clause functions; use guards for clear branches. Prefer `defp` for implementation details.
+- **Pipe**: Use `|>` when it improves readability (data flowing through transformations). Do not pipe into a single argument that is not the subject of the pipeline.
+- **Format**: Follow `.formatter.exs`; use `mix format`. Line length default 98; break long lines consistently. No trailing whitespace.
+- **Imports**: Prefer explicit `import Module, only: [...]` or no import; avoid full module import when only a few functions are used. Group `alias`, `import`, `require` at the top.
+- **Structs**: Prefer structs over maps for known shapes; use `@enforce_keys` when appropriate. Use `%__MODULE__{}` in defaults when defining structs in the same module.
