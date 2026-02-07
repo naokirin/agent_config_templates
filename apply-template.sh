@@ -68,48 +68,57 @@ if [[ ! -d "$SOURCE_DIR" ]]; then
   exit 1
 fi
 
-# Collect existing paths that would be overwritten
+# Collect existing files that would be overwritten (directories are excluded)
 CONFLICTS=()
 while IFS= read -r -d '' path; do
   rel="${path#$SOURCE_DIR/}"
   dest="$TARGET_DIR/$rel"
-  if [[ -e "$dest" ]]; then
+  if [[ -f "$dest" ]]; then
     CONFLICTS+=("$rel")
   fi
-done < <(find "$SOURCE_DIR" -mindepth 1 -print0 2>/dev/null)
+done < <(find "$SOURCE_DIR" -mindepth 1 -type f -print0 2>/dev/null)
 
-# Ask about merging first: .claude/settings.json and .cursor/hooks.json
-MERGE_SETTINGS=0
-MERGE_HOOKS=0
-if [[ -f "$TARGET_DIR/.claude/settings.json" ]] && [[ -f "$SOURCE_DIR/.claude/settings.json" ]]; then
-  echo ""
-  read -r -p ".claude/settings.json already exists. Merge with new template? [Y/n]: " reply
-  if [[ ! "$reply" =~ ^[nN]$ ]]; then
-    MERGE_SETTINGS=1
+# Mergeable files: rel_path, merge_type (concat|jq), jq_expression (for jq only, empty otherwise)
+MERGE_REL_PATHS=( "CLAUDE.md" ".claude/settings.json" ".cursor/hooks.json" )
+MERGE_TYPES=( "concat" "jq" "jq" )
+MERGE_JQ_EXPR=(
+  ""
+  '($t[0] | .hooks.PostToolUse = (($t[0].hooks.PostToolUse // []) + ($s[0].hooks.PostToolUse // [])))'
+  '($t[0] | .hooks.afterFileEdit = (($t[0].hooks.afterFileEdit // []) + ($s[0].hooks.afterFileEdit // [])))'
+)
+
+MERGE_DO=()
+for i in "${!MERGE_REL_PATHS[@]}"; do
+  rel="${MERGE_REL_PATHS[$i]}"
+  if [[ -f "$TARGET_DIR/$rel" ]] && [[ -f "$SOURCE_DIR/$rel" ]]; then
+    [[ ${#MERGE_DO[@]} -eq 0 ]] && echo ""
+    read -r -p "$rel already exists. Merge with new template? [Y/n]: " reply
+    if [[ ! "$reply" =~ ^[nN]$ ]]; then
+      MERGE_DO+=("$i")
+    fi
   fi
-fi
-if [[ -f "$TARGET_DIR/.cursor/hooks.json" ]] && [[ -f "$SOURCE_DIR/.cursor/hooks.json" ]]; then
-  read -r -p ".cursor/hooks.json already exists. Merge with new template? [Y/n]: " reply
-  if [[ ! "$reply" =~ ^[nN]$ ]]; then
-    MERGE_HOOKS=1
-  fi
-fi
+done
+
+# Paths we are merging (for overwrite list exclusion)
+MERGE_PATHS_DO=()
+for i in "${MERGE_DO[@]}"; do
+  MERGE_PATHS_DO+=( "${MERGE_REL_PATHS[$i]}" )
+done
 
 # Overwrite confirmation: exclude files we are merging from the list
 OVERWRITE_LIST=()
 for rel in "${CONFLICTS[@]}"; do
-  if [[ $MERGE_SETTINGS -eq 1 && "$rel" == ".claude/settings.json" ]]; then
-    continue
-  fi
-  if [[ $MERGE_HOOKS -eq 1 && "$rel" == ".cursor/hooks.json" ]]; then
-    continue
-  fi
+  skip=0
+  for m in "${MERGE_PATHS_DO[@]}"; do
+    [[ "$rel" == "$m" ]] && { skip=1; break; }
+  done
+  [[ $skip -eq 1 ]] && continue
   OVERWRITE_LIST+=("$rel")
 done
 
 if [[ ${#OVERWRITE_LIST[@]} -gt 0 ]]; then
   echo ""
-  echo "The following files or directories already exist:"
+  echo "The following files already exist:"
   printf '  %s\n' "${OVERWRITE_LIST[@]}"
   echo ""
   read -r -p "Overwrite and apply? [y/N]: " reply
@@ -120,37 +129,42 @@ if [[ ${#OVERWRITE_LIST[@]} -gt 0 ]]; then
 fi
 
 # Back up existing content when merging (tar will overwrite)
-if [[ $MERGE_SETTINGS -eq 1 ]]; then
-  cp "$TARGET_DIR/.claude/settings.json" "$TMP_DIR/target_settings.json"
-fi
-if [[ $MERGE_HOOKS -eq 1 ]]; then
-  cp "$TARGET_DIR/.cursor/hooks.json" "$TMP_DIR/target_hooks.json"
-fi
+for i in "${MERGE_DO[@]}"; do
+  rel="${MERGE_REL_PATHS[$i]}"
+  cp "$TARGET_DIR/$rel" "$TMP_DIR/target_merge_$i"
+done
 
 echo "Applying: $TEMPLATE_NAME -> $TARGET_DIR"
-# Exclude README.md; this script only applies Cursor/Claude Code config, not project docs
-(cd "$SOURCE_DIR" && tar cf - --exclude='README.md' .) | (cd "$TARGET_DIR" && tar xf -)
+# Exclude README.md in every directory; this script only applies Cursor/Claude Code config, not project docs
+(cd "$SOURCE_DIR" && find . -type f ! -name 'README.md' -print0 | tar cf - --null -T -) | (cd "$TARGET_DIR" && tar xf -)
 
-# Merge with jq when merge was chosen
-if [[ $MERGE_SETTINGS -eq 1 ]] || [[ $MERGE_HOOKS -eq 1 ]]; then
-  if ! command -v jq &>/dev/null; then
-    echo ""
-    echo "Warning: jq is required for merging. Not installed; files were overwritten without merge."
-    echo "Install jq and run the script again if you want to merge."
-  else
-    if [[ $MERGE_SETTINGS -eq 1 ]]; then
-      jq -n --slurpfile t "$TMP_DIR/target_settings.json" --slurpfile s "$TARGET_DIR/.claude/settings.json" \
-        '($t[0] | .hooks.PostToolUse = (($t[0].hooks.PostToolUse // []) + ($s[0].hooks.PostToolUse // [])))' \
-        | jq . > "$TMP_DIR/merged_settings.json" && mv "$TMP_DIR/merged_settings.json" "$TARGET_DIR/.claude/settings.json"
-      echo "  Merged .claude/settings.json"
-    fi
-    if [[ $MERGE_HOOKS -eq 1 ]]; then
-      jq -n --slurpfile t "$TMP_DIR/target_hooks.json" --slurpfile s "$TARGET_DIR/.cursor/hooks.json" \
-        '($t[0] | .hooks.afterFileEdit = (($t[0].hooks.afterFileEdit // []) + ($s[0].hooks.afterFileEdit // [])))' \
-        | jq . > "$TMP_DIR/merged_hooks.json" && mv "$TMP_DIR/merged_hooks.json" "$TARGET_DIR/.cursor/hooks.json"
-      echo "  Merged .cursor/hooks.json"
-    fi
-  fi
+# Apply merges (concat for CLAUDE.md, jq for JSON)
+NEED_JQ=0
+for i in "${MERGE_DO[@]}"; do
+  [[ "${MERGE_TYPES[$i]}" == "jq" ]] && NEED_JQ=1
+done
+if [[ $NEED_JQ -eq 1 ]] && ! command -v jq &>/dev/null; then
+  echo ""
+  echo "Warning: jq is required for merging JSON. Not installed; JSON files were overwritten without merge."
+  echo "Install jq and run the script again if you want to merge."
 fi
+
+for i in "${MERGE_DO[@]}"; do
+  rel="${MERGE_REL_PATHS[$i]}"
+  type="${MERGE_TYPES[$i]}"
+  if [[ "$type" == "concat" ]]; then
+    {
+      cat "$TMP_DIR/target_merge_$i"
+      echo ""; echo "---"; echo ""; echo "## From template: $TEMPLATE_NAME"; echo ""
+      cat "$TARGET_DIR/$rel"
+    } > "$TMP_DIR/merged_$i" && mv "$TMP_DIR/merged_$i" "$TARGET_DIR/$rel"
+    echo "  Merged $rel"
+  elif [[ "$type" == "jq" ]] && command -v jq &>/dev/null; then
+    expr="${MERGE_JQ_EXPR[$i]}"
+    jq -n --slurpfile t "$TMP_DIR/target_merge_$i" --slurpfile s "$TARGET_DIR/$rel" "$expr" \
+      | jq . > "$TMP_DIR/merged_$i" && mv "$TMP_DIR/merged_$i" "$TARGET_DIR/$rel"
+    echo "  Merged $rel"
+  fi
+done
 
 echo "Done."

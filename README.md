@@ -23,11 +23,11 @@ Use the script below to fetch and apply a template in any repository.
 ### 1. Run without saving the script (recommended)
 
 ```bash
-curl -sL https://raw.githubusercontent.com/naokirin/agent_config_templates/main/apply-template.sh | sed 's/\r$//' | bash -s -- python .              # Apply python template to current directory
-curl -sL https://raw.githubusercontent.com/naokirin/agent_config_templates/main/apply-template.sh | sed 's/\r$//' | bash -s -- python ./myproject   # Apply python template to myproject
+bash -c "$(curl -sL https://raw.githubusercontent.com/naokirin/agent_config_templates/main/apply-template.sh | sed 's/\r$//')" _ python .              # Apply python template to current directory
+bash -c "$(curl -sL https://raw.githubusercontent.com/naokirin/agent_config_templates/main/apply-template.sh | sed 's/\r$//')" _ python ./myproject   # Apply python template to myproject
 ```
 
-`sed 's/\r$//'` strips carriage returns so the script runs correctly even if the file has Windows (CRLF) line endings.
+Using `$(...)` loads the full script before running it (avoids "unexpected token fi" when piping). `sed 's/\r$//'` strips CR so CRLF line endings do not cause errors.
 
 ### 2. Clone this repository and run
 
@@ -76,7 +76,7 @@ Default branch is `main`. To use another branch:
 
 - When running the one-liner (without saving the script):
   ```bash
-  BRANCH=develop bash -c 'curl -sL https://raw.githubusercontent.com/naokirin/agent_config_templates/main/apply-template.sh | sed '\''s/\\r$//'\'' | bash -s -- python .'
+  BRANCH=develop bash -c 'bash -c "$(curl -sL https://raw.githubusercontent.com/naokirin/agent_config_templates/main/apply-template.sh | sed '\''s/\r$//'\'')" _ python .'
   ```
 - When cloning the repo and running `apply-template.sh`:
   ```bash
