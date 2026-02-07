@@ -14,7 +14,7 @@ set -e
 
 REPO_URL="https://github.com/naokirin/agent_config_templates.git"
 BRANCH="${BRANCH:-main}"
-AVAILABLE_TEMPLATES="elixir phoenix python ruby_on_rails rust shellscript typescript unity"
+AVAILABLE_TEMPLATES="elixir general phoenix python ruby_on_rails rust shellscript typescript unity"
 
 usage() {
   echo "Usage: $0 TEMPLATE_NAME [TARGET_DIR]"

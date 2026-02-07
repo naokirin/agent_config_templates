@@ -6,6 +6,7 @@ Templates for agents, commands, skills, and rules for Claude Code and Cursor.
 
 | Template        | Description |
 |-----------------|-------------|
+| `general`       | Language-agnostic (rules, planner, code-reviewer, /plan, /code-review). From [everything-claude-code](https://github.com/affaan-m/everything-claude-code) common. |
 | `python`        | Python (pytest, ruff, mypy, etc.) |
 | `elixir`        | Elixir (ExUnit, Credo, format, etc.) |
 | `phoenix`       | Phoenix (Ecto, LiveView, etc.) |
@@ -38,7 +39,7 @@ cd agent_config_templates
 
 ### Options
 
-- **TEMPLATE_NAME** (required): One of `python`, `elixir`, `phoenix`, `ruby_on_rails`, `rust`, `shellscript`, `typescript`, `unity`
+- **TEMPLATE_NAME** (required): One of `general`, `python`, `elixir`, `phoenix`, `ruby_on_rails`, `rust`, `shellscript`, `typescript`, `unity`
 - **TARGET_DIR** (optional): Target directory; default is the current directory (`.`)
 
 ### When files already exist
