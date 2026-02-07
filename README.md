@@ -6,7 +6,7 @@ Templates for agents, commands, skills, and rules for Claude Code and Cursor.
 
 | Template        | Description |
 |-----------------|-------------|
-| `general`       | Language-agnostic (rules, planner, code-reviewer, /plan, /code-review). From [everything-claude-code](https://github.com/affaan-m/everything-claude-code) common. |
+| `general`       | Language-agnostic (rules, agents, /plan, /code-review). Created with reference to generic parts of [everything-claude-code](https://github.com/affaan-m/everything-claude-code). |
 | `python`        | Python (pytest, ruff, mypy, etc.) |
 | `elixir`        | Elixir (ExUnit, Credo, format, etc.) |
 | `phoenix`       | Phoenix (Ecto, LiveView, etc.) |
