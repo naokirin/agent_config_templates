@@ -1,0 +1,2 @@
+# Ensure shell scripts always use LF so pipe/curl execution works
+apply-template.sh text eol=lf
