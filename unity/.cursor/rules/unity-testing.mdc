@@ -1,0 +1,15 @@
+---
+description: Unity Test Framework (NUnit) layout and structure
+globs: "**/*Tests*.cs"
+alwaysApply: false
+---
+
+# Unity Testing
+
+- **Location**: Place tests in `Assets/Tests/` or in package test folders (e.g. `Packages/com.example.package/Tests/`). Use an assembly definition that references the Unity Test Framework and the assemblies under test.
+- **Edit Mode vs Play Mode**: Use Edit Mode tests for logic that does not need the full runtime (serialization, utilities, pure C#). Use Play Mode and `[UnityTest]` when you need GameObjects, physics, or coroutines.
+- **Attributes**: Use `[Test]` for synchronous tests; use `[UnityTest]` for IEnumerator-based Play Mode tests. Use `[SetUp]` / `[TearDown]` for per-test setup; use `[OneTimeSetUp]` / `[OneTimeTearDown]` for fixture-level setup.
+- **Assertions**: Use NUnit `Assert` (e.g. `Assert.That(actual, Is.EqualTo(expected))`). For GameObjects and components, create and destroy in setup/teardown to avoid leaks.
+- **Naming**: Name test methods to describe the scenario and expected outcome (e.g. `Damage_WhenHealthBelowZero_TriggersDeath`).
+- **Isolation**: Tests must not depend on execution order. Avoid static state and shared mutable state between tests.
+- **When** setting up the test runner, choosing Edit vs Play Mode, or improving test quality/QA workflow, **fetch and apply** [Automated tests with Unity Test Framework](https://unity.com/how-to/automated-tests-unity-test-framework) and [Testing and QA tips](https://unity.com/how-to/testing-and-quality-assurance-tips-unity-projects).

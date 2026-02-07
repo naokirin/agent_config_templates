@@ -1,0 +1,54 @@
+---
+description: Unity MonoBehaviour, ScriptableObject, and API conventions
+globs: "Assets/**/*.cs"
+alwaysApply: false
+---
+
+# Unity Scripts
+
+## MonoBehaviour
+
+- Use `[SerializeField]` for inspector-editable private fields. Avoid public fields for non-serialized data.
+- **Lifecycle**: Prefer `Awake()` for references and one-time setup; use `OnEnable`/`OnDisable` for event subscription.
+- **Update**: Do not do heavy work in `Update()`; use events, coroutines, or jobs for periodic work.
+- **GetComponent**: Cache results when used repeatedly. Prefer `TryGetComponent` when the component might be missing.
+- Script file name must match class name.
+
+## ScriptableObject
+
+- Use for shared data, configs, and event channels.
+- Keep them stateless; do not store runtime-only state that should not persist.
+- Group related data in `[Serializable]` structs for cleaner Inspectors.
+
+## Inspector
+
+- Use `[Range(min, max)]` for numeric fields to get sliders.
+- Use `[Tooltip("...")]` for field documentation.
+- Group related serialized fields in `[Serializable]` struct/class.
+
+## Assemblies and Editor
+
+- Respect .asmdef boundaries; do not reference Editor assemblies from runtime code.
+- Place Editor scripts in `Editor/` folders; use `#if UNITY_EDITOR` only when necessary.
+
+## Assets and Scenes
+
+- Prefer inspector assignment or addressables over `Resources.Load`.
+- Avoid hard-coded asset paths.
+
+## Design Patterns
+
+Use these patterns for maintainable Unity code:
+
+| Pattern | Use Case | Reference |
+|---------|----------|-----------|
+| **Observer** | Event-driven communication between systems | https://learn.unity.com/tutorial/create-modular-and-maintainable-code-with-the-observer-pattern |
+| **State** | FSM for AI, game states, UI flows | https://learn.unity.com/tutorial/develop-a-modular-flexible-codebase-with-the-state-programming-pattern-1 |
+| **Object Pooling** | Frequent instantiation (bullets, particles) | https://learn.unity.com/tutorial/use-object-pooling-to-boost-performance-of-c-scripts-in-unity |
+| **MVC/MVP** | UI architecture, data binding | https://learn.unity.com/tutorial/build-a-modular-codebase-with-mvc-and-mvp-programming-patterns-1 |
+
+## ScriptableObject Patterns
+
+Fetch these guides when designing data architecture:
+- **Getting started**: https://unity.com/how-to/get-started-with-scriptableobjects-demo
+- **Separate data and logic**: https://unity.com/how-to/separate-game-data-logic-scriptable-objects

@@ -1,0 +1,59 @@
+---
+description: Unity project defaults, directory layout, and reference guides
+alwaysApply: true
+---
+
+# Unity / C# Project
+
+## Principles
+
+- **Unity Conventions**: Follow [Unity C# coding conventions](https://docs.unity3d.com/Manual/coding-conventions.html) for naming, layout, and API usage. Place scripts under `Assets/Scripts/`; use Assembly Definition (.asmdef) when splitting assemblies.
+- **Composition over Inheritance**: Prefer components and composition; avoid deep MonoBehaviour inheritance. Use ScriptableObjects for data and settings.
+- **Editor and Runtime Separation**: Keep Editor-only code in `Editor/` folders; avoid runtime logic depending on editor APIs.
+
+## Standard Directory Layout
+
+| Directory | Purpose |
+|-----------|---------|
+| `Assets/Scripts/` | Runtime C# scripts |
+| `Assets/Scripts/Editor/` | Editor scripts, custom inspectors |
+| `Assets/Tests/` | Unity Test Framework tests |
+| `Assets/Resources/` | Runtime-loadable assets (use sparingly) |
+| `Packages/` | Package manifests and embedded packages |
+| `ProjectSettings/` | Unity project settings |
+
+## Style and Verification
+
+- **C# Style**: Follow csharp-style and unity-scripts rules. Use PascalCase for public and [SerializeField] members; camelCase for private fields.
+- **Format**: Use `dotnet format` when project has SDK-style .csproj; otherwise follow EditorConfig/project conventions.
+- **Tests**: Use Unity Test Framework (NUnit). Run tests after code changes to confirm no regressions.
+- **Verification**: After code changes, ensure project compiles and run relevant tests. Use `/run-tests` and `/run-format` when available.
+
+## Planning (Cursor)
+
+For large or multi-file changes, use Plan Mode to create an implementation plan and get approval before coding.
+
+## Unity Best Practices Quick Reference
+
+Fetch and apply the relevant guide when working on these topics:
+
+| Topic | Guide URL |
+|-------|-----------|
+| **Project structure, folders, naming** | https://unity.com/how-to/organizing-your-project |
+| **Version control (Git, LFS, branching)** | https://unity.com/how-to/version-control-systems |
+| **DevOps, CI/CD, task branches** | https://unity.com/how-to/devops-task-branch-workflow |
+| **C# formatting (braces, indentation)** | https://unity.com/how-to/formatting-best-practices-c-scripting-unity |
+| **C# naming conventions** | https://unity.com/how-to/naming-and-code-style-tips-c-scripting-unity |
+| **Observer pattern, events** | https://learn.unity.com/tutorial/create-modular-and-maintainable-code-with-the-observer-pattern |
+| **State pattern** | https://learn.unity.com/tutorial/develop-a-modular-flexible-codebase-with-the-state-programming-pattern-1 |
+| **MVC/MVP architecture** | https://learn.unity.com/tutorial/build-a-modular-codebase-with-mvc-and-mvp-programming-patterns-1 |
+| **Object pooling, performance** | https://learn.unity.com/tutorial/use-object-pooling-to-boost-performance-of-c-scripts-in-unity |
+| **2D optimization (Tilemap)** | https://unity.com/how-to/optimize-performance-2d-games-unity-tilemap |
+| **HDRP rendering** | https://unity.com/how-to/getting-started-with-hdrp |
+| **Engine best practices (physics, memory)** | https://docs.unity3d.com/Manual/best-practice-guides.html |
+
+## Core Reference
+
+- [Unity Manual – Scripting](https://docs.unity3d.com/Manual/ScriptingSection.html)
+- [Unity C# coding conventions](https://docs.unity3d.com/Manual/coding-conventions.html)
+- [Unity Test Framework](https://docs.unity3d.com/Packages/com.unity.test-framework@latest)

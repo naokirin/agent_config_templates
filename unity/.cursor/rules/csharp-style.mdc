@@ -1,0 +1,42 @@
+---
+description: C# coding style (naming, braces, expressions)
+globs: "**/*.cs"
+alwaysApply: false
+---
+
+# C# Style
+
+## Naming
+
+- **Types**: PascalCase for classes, structs, interfaces, enums, delegates. Prefix interfaces with `I` (e.g. `IHealth`).
+- **Members**: PascalCase for public/protected; camelCase for private fields. Use `_camelCase` for private fields if project convention.
+- **Booleans**: prefix with verb (`isDead`, `hasWeapon`). Methods returning bool: phrase as question (`IsGameOver`, `HasStarted`).
+- **Constants**: PascalCase; consider `UPPER_SNAKE` for const when used as flags.
+- Avoid special characters, backslashes, symbols in identifiers (interferes with Unity CLI tools).
+
+## Layout
+
+- 4 spaces for indentation (Unity default). Use braces for all control blocks, even single-line.
+- Namespace: match folder structure. Use file-scoped namespaces when targeting C# 10+ (`namespace Foo;`).
+- Keep files focused; one main type per file. Order: fields, constructors, public API, private methods.
+- Include `default` in switch when useful.
+
+## Expressions
+
+- Use `var` when type is obvious; explicit type for public API.
+- Prefer `is null` / `is not null` over `== null` / `!= null`.
+- Use null-conditional `?.` and null-coalescing `??` where appropriate.
+- Use expression-bodied members for single expressions: `public int Value => _value;`
+- Prefer `string.IsNullOrEmpty` / `string.IsNullOrWhiteSpace` over manual checks.
+
+## Async
+
+- Avoid `async void`; use `async Task` except for event handlers.
+- Prefer `ValueTask` for hot paths when applicable.
+
+## Best Practices Reference
+
+Fetch these guides when establishing team conventions or resolving style questions:
+- **Formatting (braces, indentation, regions)**: https://unity.com/how-to/formatting-best-practices-c-scripting-unity
+- **Naming conventions**: https://unity.com/how-to/naming-and-code-style-tips-c-scripting-unity
+- **Microsoft C# conventions**: https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/coding-style/coding-conventions
