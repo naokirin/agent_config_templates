@@ -1,0 +1,13 @@
+---
+description: Shell script idioms (error handling, portability, patterns)
+globs: "**/*.sh"
+alwaysApply: false
+---
+
+# Shell Script Idioms
+
+- **Error handling**: Use `set -euo pipefail` at the top of scripts unless you need to allow unset vars or pipe failures; document exceptions. Check exit codes of critical commands when not using `set -e`. Use `trap` for cleanup (e.g. `trap 'rm -rf "$TMP_DIR"' EXIT`).
+- **Temporary files**: Prefer `mktemp` or `mktemp -d`; avoid fixed paths in /tmp. Clean up in a trap when possible.
+- **Portability**: Prefer Bash when the project is Bash-only; avoid Bash-only syntax in scripts that must run under POSIX sh. Use `command -v cmd` to check for commands; avoid `which`.
+- **Arrays**: In Bash, use `array=(...)` and `"${array[@]}"` (with quotes). Iterate with `for x in "${array[@]}"; do ...`.
+- **Testing**: Place tests in `tests/` per project convention. Use bats or shunit2; keep test names clear and focused.

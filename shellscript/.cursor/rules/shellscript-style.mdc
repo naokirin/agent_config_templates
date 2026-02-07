@@ -1,0 +1,14 @@
+---
+description: Shell script style (naming, quoting, structure)
+globs: "**/*.sh"
+alwaysApply: false
+---
+
+# Shell Script Style
+
+- **Shebang**: Use `#!/usr/bin/env bash` for Bash scripts; use `#!/bin/sh` only when targeting POSIX sh. One shebang per file.
+- **Naming**: UPPER_SNAKE_CASE for exported or global constants; lower_snake_case for functions and local variables. Use descriptive names; avoid single-letter names except in very short loops.
+- **Quoting**: Always quote variable expansions and command substitutions: `"$var"`, `"$(cmd)"`. Use double quotes unless single-quote semantics are required (no expansion).
+- **Conditionals**: Prefer `[[ ]]` over `[ ]` in Bash for pattern matching and safer semantics. Use `(( ))` for arithmetic.
+- **Functions**: Define before use; use `local` for function-local variables. Prefer small, single-purpose functions.
+- **Files**: One main script or library per file; source shared code from `lib/` or similar when appropriate.

@@ -1,0 +1,38 @@
+---
+description: Shell script project defaults, layout, and reference guides
+alwaysApply: true
+---
+
+# Shell Script Project
+
+## Principles
+
+- **Robustness**: Use `set -euo pipefail` in scripts that should fail on error, unset vars, or pipe failures. Use `set -e` at minimum; document when relaxing.
+- **Quoting**: Always quote variables and command substitutions: `"$var"`, `"$(cmd)"`. Prefer `[[ ]]` over `[ ]` in Bash.
+- **ShellCheck**: Follow ShellCheck recommendations; fix or disable with justification (e.g. `# shellcheck disable=SC2086` with a short comment).
+
+## Standard Layout
+
+| Path | Purpose |
+|------|---------|
+| `scripts/` or project root | Main executable scripts (`.sh`) |
+| `lib/` or `src/` | Sourced library scripts (optional) |
+| `tests/` | Bats or shunit2 tests (optional) |
+
+## Tooling
+
+- **Format**: Use shfmt per project (e.g. `-i 2 -ci`). Run before committing.
+- **Lint**: Use ShellCheck; fix or allow with justification when necessary.
+- **Tests**: Use bats or shunit2 when present; keep tests in `tests/` per project convention.
+- **Verification**: After code changes, run shellcheck and format (and tests when available). Use `/run-lint`, `/run-format`, and `/run-tests` when available.
+
+## Planning (Cursor)
+
+For large or multi-file changes, use Plan Mode to create an implementation plan and get approval before coding. This reduces wrong-direction work and keeps changes focused.
+
+## Reference
+
+- [ShellCheck](https://www.shellcheck.net/)
+- [shfmt](https://github.com/mvdan/sh)
+- [bats-core](https://github.com/bats-core/bats-core)
+- [Google Shell Style Guide](https://google.github.io/styleguide/shellguide.html)
