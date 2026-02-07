@@ -20,13 +20,11 @@ Templates for agents, commands, skills, and rules for Claude Code and Cursor.
 
 Use the script below to fetch and apply a template in any repository.
 
-### 1. Download and run the script (recommended)
+### 1. Run without saving the script (recommended)
 
 ```bash
-curl -sL https://raw.githubusercontent.com/naokirin/agent_config_templates/main/apply-template.sh -o apply-template.sh
-chmod +x apply-template.sh
-./apply-template.sh python .              # Apply python template to current directory
-./apply-template.sh python ./myproject   # Apply python template to myproject
+curl -sL https://raw.githubusercontent.com/naokirin/agent_config_templates/main/apply-template.sh | bash -s -- python .              # Apply python template to current directory
+curl -sL https://raw.githubusercontent.com/naokirin/agent_config_templates/main/apply-template.sh | bash -s -- python ./myproject   # Apply python template to myproject
 ```
 
 ### 2. Clone this repository and run
@@ -35,6 +33,15 @@ chmod +x apply-template.sh
 git clone https://github.com/naokirin/agent_config_templates.git
 cd agent_config_templates
 ./apply-template.sh python /path/to/your/project
+```
+
+### 3. Save the script and run (when you want to inspect it first)
+
+```bash
+curl -sL https://raw.githubusercontent.com/naokirin/agent_config_templates/main/apply-template.sh -o apply-template.sh
+chmod +x apply-template.sh
+./apply-template.sh python .
+# Remove with rm apply-template.sh when no longer needed
 ```
 
 ### Options
@@ -65,9 +72,14 @@ Merging is done with **jq**. If `jq` is not installed, the script cannot merge a
 
 Default branch is `main`. To use another branch:
 
-```bash
-BRANCH=develop ./apply-template.sh python .
-```
+- When running the one-liner (without saving the script):
+  ```bash
+  BRANCH=develop bash -c 'curl -sL https://raw.githubusercontent.com/naokirin/agent_config_templates/main/apply-template.sh | bash -s -- python .'
+  ```
+- When cloning the repo and running `apply-template.sh`:
+  ```bash
+  BRANCH=develop ./apply-template.sh python .
+  ```
 
 ## Template details
 
