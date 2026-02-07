@@ -140,13 +140,13 @@ if [[ $MERGE_SETTINGS -eq 1 ]] || [[ $MERGE_HOOKS -eq 1 ]]; then
     if [[ $MERGE_SETTINGS -eq 1 ]]; then
       jq -n --slurpfile t "$TMP_DIR/target_settings.json" --slurpfile s "$TARGET_DIR/.claude/settings.json" \
         '($t[0] | .hooks.PostToolUse = (($t[0].hooks.PostToolUse // []) + ($s[0].hooks.PostToolUse // [])))' \
-        > "$TMP_DIR/merged_settings.json" && mv "$TMP_DIR/merged_settings.json" "$TARGET_DIR/.claude/settings.json"
+        | jq . > "$TMP_DIR/merged_settings.json" && mv "$TMP_DIR/merged_settings.json" "$TARGET_DIR/.claude/settings.json"
       echo "  Merged .claude/settings.json"
     fi
     if [[ $MERGE_HOOKS -eq 1 ]]; then
       jq -n --slurpfile t "$TMP_DIR/target_hooks.json" --slurpfile s "$TARGET_DIR/.cursor/hooks.json" \
         '($t[0] | .hooks.afterFileEdit = (($t[0].hooks.afterFileEdit // []) + ($s[0].hooks.afterFileEdit // [])))' \
-        > "$TMP_DIR/merged_hooks.json" && mv "$TMP_DIR/merged_hooks.json" "$TARGET_DIR/.cursor/hooks.json"
+        | jq . > "$TMP_DIR/merged_hooks.json" && mv "$TMP_DIR/merged_hooks.json" "$TARGET_DIR/.cursor/hooks.json"
       echo "  Merged .cursor/hooks.json"
     fi
   fi

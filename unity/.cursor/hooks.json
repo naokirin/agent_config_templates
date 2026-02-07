@@ -1,1 +1,11 @@
-{"version":1,"hooks":{"afterFileEdit":[{"pattern":"**/*.cs","command":".cursor/hooks/format-csharp.sh"}]}}
+{
+  "version": 1,
+  "hooks": {
+    "afterFileEdit": [
+      {
+        "pattern": "**/*.cs",
+        "command": ".cursor/hooks/format-csharp.sh"
+      }
+    ]
+  }
+}

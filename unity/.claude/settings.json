@@ -1,1 +1,17 @@
-{"hooks":{"PostToolUse":[{"matcher":"Edit|Write","hooks":[{"type":"command","command":"\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/format-csharp.sh","timeout":30,"statusMessage":"Running dotnet format..."}]}]}}
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/format-csharp.sh",
+            "timeout": 30,
+            "statusMessage": "Running dotnet format..."
+          }
+        ]
+      }
+    ]
+  }
+}

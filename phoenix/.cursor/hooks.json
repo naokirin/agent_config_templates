@@ -1,1 +1,15 @@
-{"version":1,"hooks":{"afterFileEdit":[{"pattern":"**/*.ex","command":".cursor/hooks/format-elixir.sh"},{"pattern":"**/*.exs","command":".cursor/hooks/format-elixir.sh"}]}}
+{
+  "version": 1,
+  "hooks": {
+    "afterFileEdit": [
+      {
+        "pattern": "**/*.ex",
+        "command": ".cursor/hooks/format-elixir.sh"
+      },
+      {
+        "pattern": "**/*.exs",
+        "command": ".cursor/hooks/format-elixir.sh"
+      }
+    ]
+  }
+}
