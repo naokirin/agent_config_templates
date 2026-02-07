@@ -38,8 +38,8 @@ This template is provided alongside a Cursor configuration (`.cursor`) in the sa
 
 | Command | Description | Sub-agent |
 |---------|-------------|-----------|
-| `/run-tests` | Run Unity tests and fix failures | `unity-tester` |
-| `/run-format` | Format C# with dotnet format (when .sln exists) | — |
+| `/run-tests-unity` | Run Unity tests and fix failures | `unity-tester` |
+| `/run-format-unity` | Format C# with dotnet format (when .sln exists) | — |
 | `/code-review-unity` | Review Unity/C# code for style and conventions | `unity-code-reviewer` |
 
 ## Sub-agents
@@ -65,4 +65,4 @@ This template is provided alongside a Cursor configuration (`.cursor`) in the sa
 
 ## Verification
 
-After code changes, verify with: project compile (Unity Editor or batchmode) and relevant tests. Use `/run-tests` and `/run-format` when available. See CLAUDE.md for full workflows.
+After code changes, verify with: project compile (Unity Editor or batchmode) and relevant tests. Use `/run-tests-unity` and `/run-format-unity` when available. See CLAUDE.md for full workflows.

@@ -7,8 +7,8 @@ This template is provided alongside a Cursor configuration (`.cursor`) in the sa
 ## Prerequisites
 
 - **Rust** (rustc, cargo): Install via [rustup](https://rustup.rs).
-- **rustfmt**: Included with rustup; used by the format hook and `/run-rustfmt` command.
-- **Clippy** (optional but recommended): `rustup component add clippy`; used by `/run-clippy` command.
+- **rustfmt**: Included with rustup; used by the format hook and `/run-rustfmt-rust` command.
+- **Clippy** (optional but recommended): `rustup component add clippy`; used by `/run-clippy-rust` command.
 - **jq** or **python3** (optional): Used by the format hook to parse JSON. If neither is available, the hook skips formatting.
 
 ## Structure
@@ -41,10 +41,10 @@ Slash commands triggered manually with `/` in chat.
 
 | Command | Description | Sub-agent |
 |---------|-------------|-----------|
-| `/run-tests` | Run tests and fix failures | `rust-tester` |
+| `/run-tests-rust` | Run tests and fix failures | `rust-tester` |
 | `/code-review-rust` | Review Rust code for style, safety, and maintainability | `rust-code-reviewer` |
-| `/run-clippy` | Run Clippy and fix or document warnings | — |
-| `/run-rustfmt` | Format code with rustfmt | — |
+| `/run-clippy-rust` | Run Clippy and fix or document warnings | — |
+| `/run-rustfmt-rust` | Format code with rustfmt | — |
 
 Commands with a sub-agent run in a forked context (`context: fork`) for isolation.
 
@@ -81,7 +81,7 @@ Hook configuration is in `.claude/settings.json`. The hook script receives JSON 
 
 ## CLAUDE.md and verification
 
-`CLAUDE.md` is kept short and focuses on principles, directory layout, tooling, **verification** (run `cargo test` and `cargo clippy` after changes), workflows, and code review categories. Detailed style lives in the linked API Guidelines and in `.cursor/rules/` if you use Cursor too. After code changes, the agent should run tests and Clippy to verify; use `/run-tests` and `/run-clippy` when appropriate.
+`CLAUDE.md` is kept short and focuses on principles, directory layout, tooling, **verification** (run `cargo test` and `cargo clippy` after changes), workflows, and code review categories. Detailed style lives in the linked API Guidelines and in `.cursor/rules/` if you use Cursor too. After code changes, the agent should run tests and Clippy to verify; use `/run-tests-rust` and `/run-clippy-rust` when appropriate.
 
 ## Comparison with Cursor Configuration
 

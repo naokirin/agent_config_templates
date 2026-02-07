@@ -6,7 +6,7 @@
 - **agents/**  
   - `shellscript-code-reviewer.md`, `shellscript-tester.md`: Code review and test-running agents.
 - **commands/**  
-  - `/run-lint`, `/run-format`, `/run-tests`, `/code-review-shellscript`: Lint, format, tests, and review.
+  - `/run-lint-shellscript`, `/run-format-shellscript`, `/run-tests-shellscript`, `/code-review-shellscript`: Lint, format, tests, and review.
 - **hooks/**  
   - `format-shellscript.sh`: Runs shfmt after editing `.sh` files (when shfmt is installed).
 - **skills/**  

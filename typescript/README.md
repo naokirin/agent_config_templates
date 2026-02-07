@@ -37,7 +37,7 @@ This template expects [Biome](https://biomejs.dev/) for linting and formatting. 
 
 ## Best practices (built into this template)
 
-- **Verification**: After code changes, run typecheck (`npm run typecheck` or `tsc --noEmit`), tests (`npm test`), and lint (`npm run lint`). Use `/run-tests`, `/run-lint`, and `/run-format` when available so the agent can verify its own work.
+- **Verification**: After code changes, run typecheck (`npm run typecheck` or `tsc --noEmit`), tests (`npm test`), and lint (`npm run lint`). Use `/run-tests-typescript`, `/run-lint-typescript`, and `/run-format-typescript` when available so the agent can verify its own work.
 - **Style**: Style and idioms are defined in `.cursor/rules/` (Cursor) or in CLAUDE.md and the linked references (Claude Code). Enforce with Biome; avoid pasting full style guides into instructions.
 - **Planning**: For large or multi-file changes, use Plan Mode (Cursor) or a plan-first workflow so the agent implements with a clear, approved plan.
 

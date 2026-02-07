@@ -26,7 +26,7 @@ alwaysApply: true
 - **Format**: Use `mix format`. Run before committing.
 - **Lint**: Use `mix credo` when available. Fix or allow with justification.
 - **Tests**: `mix test`; use path or `--only tag` for scoped runs. Use ConnCase, DataCase, and LiveView test helpers from `test/support/`.
-- **Verification**: After code changes, run `mix test` and `mix credo`. Use `/run-tests` and `/run-credo` when available.
+- **Verification**: After code changes, run `mix test` and `mix credo`. Use `/run-tests-phoenix` and `/run-credo-phoenix` when available.
 
 ## Planning (Cursor)
 

@@ -9,8 +9,8 @@ This template is provided alongside a Cursor configuration (`.cursor`) in the sa
 - **Ruby** 3.1+
 - **Rails** 7.0+ (Hotwire rules assume Rails 7+ with Turbo/Stimulus)
 - **RuboCop** (optional but recommended): `rubocop`, `rubocop-rails`, `rubocop-rspec` in `Gemfile`
-- **Brakeman** (optional): for the `/run-brakeman` security scan command
-- **bundler-audit** (optional): for the `/run-bundler-audit` dependency vulnerability scan
+- **Brakeman** (optional): for the `/run-brakeman-rails` security scan command
+- **bundler-audit** (optional): for the `/run-bundler-audit-rails` dependency vulnerability scan
 - **RSpec** or **Minitest**: rules support both; RSpec-specific rules apply only to `*_spec.rb` files
 
 ## Structure
@@ -43,12 +43,12 @@ Slash commands triggered manually with `/` in chat.
 
 | Command | Description | Sub-agent |
 |---------|-------------|-----------|
-| `/run-tests` | Run tests and fix failures (RSpec or Minitest) | `rails-tester` |
+| `/run-tests-rails` | Run tests and fix failures (RSpec or Minitest) | `rails-tester` |
 | `/code-review-rails` | Review Rails code for style, security, and maintainability | `rails-code-reviewer` |
-| `/generate-migration` | Generate and edit a Rails migration | — |
-| `/run-rubocop` | Run RuboCop and fix offenses | — |
-| `/run-brakeman` | Run Brakeman security scan and review warnings | — |
-| `/run-bundler-audit` | Scan gem dependencies for known vulnerabilities | — |
+| `/generate-migration-rails` | Generate and edit a Rails migration | — |
+| `/run-rubocop-rails` | Run RuboCop and fix offenses | — |
+| `/run-brakeman-rails` | Run Brakeman security scan and review warnings | — |
+| `/run-bundler-audit-rails` | Scan gem dependencies for known vulnerabilities | — |
 
 Commands with a sub-agent run in a forked context (`context: fork`) for isolation. Commands without a sub-agent use `disable-model-invocation: true` so Claude does not auto-trigger them.
 
@@ -85,7 +85,7 @@ Hook configuration is in `.claude/settings.json`. The hook script receives JSON 
 
 ## CLAUDE.md and verification
 
-`CLAUDE.md` is kept short and focuses on principles, directory layout, style references (links + RuboCop), **verification** (run tests and RuboCop after changes), workflows, and code review categories. Detailed style lives in the linked style guides and in `.cursor/rules/` if you use Cursor too. After code changes, the agent should run tests and RuboCop to verify; use `/run-tests` and `/run-rubocop` when appropriate.
+`CLAUDE.md` is kept short and focuses on principles, directory layout, style references (links + RuboCop), **verification** (run tests and RuboCop after changes), workflows, and code review categories. Detailed style lives in the linked style guides and in `.cursor/rules/` if you use Cursor too. After code changes, the agent should run tests and RuboCop to verify; use `/run-tests-rails` and `/run-rubocop-rails` when appropriate.
 
 ## Comparison with Cursor Configuration
 

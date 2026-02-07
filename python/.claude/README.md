@@ -7,9 +7,9 @@ This template is provided alongside a Cursor configuration (`.cursor`) in the sa
 ## Prerequisites
 
 - **Python 3.x**: Ensure Python and pip (or uv/poetry) are available.
-- **Ruff** (optional): Add for lint and format; used by `/run-lint`, `/run-format`, and the format hook. See the repo root **README.md** (section “Introducing Ruff and type checking”) for install and pyproject.toml config.
-- **pytest** (optional): Add for tests; used by `/run-tests`.
-- **mypy or pyright** (optional): Add for type checking; used by `/run-typecheck`.
+- **Ruff** (optional): Add for lint and format; used by `/run-lint-python`, `/run-format-python`, and the format hook. See the repo root **README.md** (section “Introducing Ruff and type checking”) for install and pyproject.toml config.
+- **pytest** (optional): Add for tests; used by `/run-tests-python`.
+- **mypy or pyright** (optional): Add for type checking; used by `/run-typecheck-python`.
 - **jq** or **python3** (optional): Used by the format hook to parse JSON. If neither is available, the hook skips formatting.
 
 ## Structure
@@ -42,11 +42,11 @@ Slash commands triggered manually with `/` in chat.
 
 | Command | Description | Sub-agent |
 |---------|-------------|-----------|
-| `/run-tests` | Run pytest and fix failures | `python-tester` |
+| `/run-tests-python` | Run pytest and fix failures | `python-tester` |
 | `/code-review-python` | Review Python code for style, types, and maintainability | `python-code-reviewer` |
-| `/run-lint` | Run Ruff linter and fix auto-fixable issues | — |
-| `/run-format` | Format code with Ruff or Black | — |
-| `/run-typecheck` | Run mypy or pyright | — |
+| `/run-lint-python` | Run Ruff linter and fix auto-fixable issues | — |
+| `/run-format-python` | Format code with Ruff or Black | — |
+| `/run-typecheck-python` | Run mypy or pyright | — |
 
 Commands with a sub-agent run in a forked context (`context: fork`) for isolation.
 
@@ -83,7 +83,7 @@ Hook configuration is in `.claude/settings.json`. See [Hooks documentation](http
 
 ## CLAUDE.md and verification
 
-`CLAUDE.md` is kept short and focuses on principles, directory layout, tooling, **verification** (run typecheck, tests, and lint after changes), workflows, and code review categories. Detailed style lives in the linked references and in `.cursor/rules/` if you use Cursor too. After code changes, the agent should run typecheck, tests, and lint to verify; use `/run-typecheck`, `/run-tests`, and `/run-lint` when appropriate.
+`CLAUDE.md` is kept short and focuses on principles, directory layout, tooling, **verification** (run typecheck, tests, and lint after changes), workflows, and code review categories. Detailed style lives in the linked references and in `.cursor/rules/` if you use Cursor too. After code changes, the agent should run typecheck, tests, and lint to verify; use `/run-typecheck-python`, `/run-tests-python`, and `/run-lint-python` when appropriate.
 
 ## Comparison with Cursor Configuration
 

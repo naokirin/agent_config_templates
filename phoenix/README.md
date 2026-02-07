@@ -9,7 +9,7 @@ This template provides AI agent configuration for **Phoenix framework** projects
 
 ## Best practices (built into this template)
 
-- **Verification**: After code changes, run `mix test` and `mix credo` (and `mix format`). Use `/run-tests` and `/run-credo` when available so the agent can verify its own work.
+- **Verification**: After code changes, run `mix test` and `mix credo` (and `mix format`). Use `/run-tests-phoenix` and `/run-credo-phoenix` when available so the agent can verify its own work.
 - **Context boundaries**: Keep business logic in contexts (`lib/my_app/`); keep controllers and LiveViews thin and delegate to contexts. Rules and skills reinforce this.
 - **Planning**: For large or multi-file changes (e.g. new context, new LiveView flow), use Plan Mode (Cursor) or a plan-first workflow so the agent implements with a clear, approved plan.
 - **Migrations**: Do not modify migration files after they have been run in production; add new migrations for further changes.

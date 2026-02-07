@@ -17,7 +17,7 @@
 
 ### Introducing ShellCheck and shfmt
 
-To add lint and format: install `shellcheck` and optionally `shfmt`. Example: `shellcheck script.sh`, `shfmt -w -i 2 -ci script.sh`. The format hook and `/run-lint`, `/run-format` use these when available. For tests, use [bats-core](https://github.com/bats-core/bats-core) or [shunit2](https://github.com/kward/shunit2).
+To add lint and format: install `shellcheck` and optionally `shfmt`. Example: `shellcheck script.sh`, `shfmt -w -i 2 -ci script.sh`. The format hook and `/run-lint-shellscript`, `/run-format-shellscript` use these when available. For tests, use [bats-core](https://github.com/bats-core/bats-core) or [shunit2](https://github.com/kward/shunit2).
 
 ## Tooling and Style
 
@@ -30,9 +30,9 @@ To add lint and format: install `shellcheck` and optionally `shfmt`. Example: `s
 
 After code changes, verify with:
 
-- **Lint**: `shellcheck script.sh` or `shellcheck scripts/`. Use `/run-lint` when available.
-- **Format**: `shfmt -w -i 2 -ci .` (or project options); use `/run-format` when available.
-- **Tests**: `bats tests/` or project test command; use `/run-tests` when available.
+- **Lint**: `shellcheck script.sh` or `shellcheck scripts/`. Use `/run-lint-shellscript` when available.
+- **Format**: `shfmt -w -i 2 -ci .` (or project options); use `/run-format-shellscript` when available.
+- **Tests**: `bats tests/` or project test command; use `/run-tests-shellscript` when available.
 
 ## Reference
 

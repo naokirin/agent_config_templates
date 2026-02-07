@@ -7,7 +7,7 @@ This template is provided alongside a Cursor configuration (`.cursor`) in the sa
 ## Prerequisites
 
 - **Elixir**, **Mix**, and **Phoenix**: Install via [elixir-lang.org](https://elixir-lang.org/install.html) and [Phoenix installation guide](https://hexdocs.pm/phoenix/installation.html).
-- **Credo** (optional): Add to mix.exs deps and run `mix deps.get`; used by `/run-credo` command.
+- **Credo** (optional): Add to mix.exs deps and run `mix deps.get`; used by `/run-credo-phoenix` command.
 - **jq** or **python3** (optional): Used by the format hook to parse JSON. If neither is available, the hook skips formatting.
 
 ## Structure
@@ -40,11 +40,11 @@ Slash commands triggered manually with `/` in chat.
 
 | Command | Description | Sub-agent |
 |---------|-------------|-----------|
-| `/run-tests` | Run tests and fix failures | `phoenix-tester` |
+| `/run-tests-phoenix` | Run tests and fix failures | `phoenix-tester` |
 | `/code-review-phoenix` | Review Phoenix code for context boundaries, style, Ecto, LiveView, maintainability | `phoenix-code-reviewer` |
-| `/run-credo` | Run Credo and fix or document warnings | — |
-| `/run-format` | Format code with mix format | — |
-| `/generate-context` | Generate Phoenix context/scaffold with mix phx.gen.* | — |
+| `/run-credo-phoenix` | Run Credo and fix or document warnings | — |
+| `/run-format-phoenix` | Format code with mix format | — |
+| `/generate-context-phoenix` | Generate Phoenix context/scaffold with mix phx.gen.* | — |
 
 Commands with a sub-agent run in a forked context (`context: fork`) for isolation.
 
@@ -83,7 +83,7 @@ Hook configuration is in `.claude/settings.json`. See [Hooks documentation](http
 
 ## CLAUDE.md and verification
 
-`CLAUDE.md` is kept short and focuses on principles, directory layout, **context boundaries**, tooling, **verification** (run `mix test` and `mix credo` after changes), workflows, and code review categories. Detailed style lives in the linked docs and in `.cursor/rules/` if you use Cursor too. After code changes, the agent should run tests and Credo to verify; use `/run-tests` and `/run-credo` when appropriate.
+`CLAUDE.md` is kept short and focuses on principles, directory layout, **context boundaries**, tooling, **verification** (run `mix test` and `mix credo` after changes), workflows, and code review categories. Detailed style lives in the linked docs and in `.cursor/rules/` if you use Cursor too. After code changes, the agent should run tests and Credo to verify; use `/run-tests-phoenix` and `/run-credo-phoenix` when appropriate.
 
 ## Comparison with Cursor Configuration
 

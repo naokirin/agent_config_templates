@@ -9,8 +9,8 @@ This template is provided alongside a Claude Code configuration (`.claude` + `CL
 - **Ruby** 3.1+
 - **Rails** 7.0+ (Hotwire rules assume Rails 7+ with Turbo/Stimulus)
 - **RuboCop** (optional but recommended): `rubocop`, `rubocop-rails`, `rubocop-rspec` in `Gemfile`
-- **Brakeman** (optional): for the `/run-brakeman` security scan command
-- **bundler-audit** (optional): for the `/run-bundler-audit` dependency vulnerability scan
+- **Brakeman** (optional): for the `/run-brakeman-rails` security scan command
+- **bundler-audit** (optional): for the `/run-bundler-audit-rails` dependency vulnerability scan
 - **RSpec** or **Minitest**: rules and agents support both; RSpec-specific rules apply only to `*_spec.rb` files
 
 ## Structure
@@ -53,12 +53,12 @@ This template is provided alongside a Claude Code configuration (`.claude` + `CL
 
 ## Commands
 
-- `/run-tests` — Run tests and fix failures (delegates to **rails-tester** agent).
-- `/generate-migration` — Guide for generating and editing migrations.
+- `/run-tests-rails` — Run tests and fix failures (delegates to **rails-tester** agent).
+- `/generate-migration-rails` — Guide for generating and editing migrations.
 - `/code-review-rails` — Review Rails code for style, security, and maintainability (delegates to **rails-code-reviewer** agent).
-- `/run-rubocop` — Run RuboCop and fix offenses (auto or manual).
-- `/run-brakeman` — Run Brakeman security scan and review warnings.
-- `/run-bundler-audit` — Scan gem dependencies for known vulnerabilities.
+- `/run-rubocop-rails` — Run RuboCop and fix offenses (auto or manual).
+- `/run-brakeman-rails` — Run Brakeman security scan and review warnings.
+- `/run-bundler-audit-rails` — Scan gem dependencies for known vulnerabilities.
 
 ## Agents (subagents)
 

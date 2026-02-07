@@ -20,7 +20,7 @@
 
 ### Introducing Biome
 
-To add Biome to a project: install with `npm install -D @biomejs/biome`, then run `npx biome init` to create `biome.json`. Add scripts: `"lint": "biome lint ."`, `"lint:fix": "biome lint --write ."`, `"format": "biome format --write ."`. The format hook and `/run-lint` / `/run-format` use these when available.
+To add Biome to a project: install with `npm install -D @biomejs/biome`, then run `npx biome init` to create `biome.json`. Add scripts: `"lint": "biome lint ."`, `"lint:fix": "biome lint --write ."`, `"format": "biome format --write ."`. The format hook and `/run-lint-typescript` / `/run-format-typescript` use these when available.
 
 ## Tooling and Style
 
@@ -34,10 +34,10 @@ To add Biome to a project: install with `npm install -D @biomejs/biome`, then ru
 
 After code changes, verify with:
 
-- **Typecheck**: `npm run typecheck` or `npx tsc --noEmit`. Use `/run-typecheck` when available.
-- **Tests**: `npm test` or `npm run test` (optionally with path or pattern). Use `/run-tests` when available.
-- **Lint**: `npm run lint` or `npx biome lint .` (optionally `--write` to fix); use `/run-lint` when available.
-- **Format**: `npm run format` or `npx biome format --write .`; use `/run-format` when available.
+- **Typecheck**: `npm run typecheck` or `npx tsc --noEmit`. Use `/run-typecheck-typescript` when available.
+- **Tests**: `npm test` or `npm run test` (optionally with path or pattern). Use `/run-tests-typescript` when available.
+- **Lint**: `npm run lint` or `npx biome lint .` (optionally `--write` to fix); use `/run-lint-typescript` when available.
+- **Format**: `npm run format` or `npx biome format --write .`; use `/run-format-typescript` when available.
 
 ## Reference
 

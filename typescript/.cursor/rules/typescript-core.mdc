@@ -27,7 +27,7 @@ alwaysApply: true
 - **Lint**: Use Biome linter; fix or allow with justification when necessary.
 - **Typecheck**: Run `npm run typecheck` or `tsc --noEmit` (or equivalent) after code changes.
 - **Tests**: Use Vitest, Jest, or project test runner; keep tests per project convention.
-- **Verification**: After code changes, run typecheck, tests, and lint to confirm no regressions. Use `/run-typecheck`, `/run-tests`, and `/run-lint` when available.
+- **Verification**: After code changes, run typecheck, tests, and lint to confirm no regressions. Use `/run-typecheck-typescript`, `/run-tests-typescript`, and `/run-lint-typescript` when available.
 
 ## Planning (Cursor)
 

@@ -7,7 +7,7 @@ This template is provided alongside a Cursor configuration (`.cursor`) in the sa
 ## Prerequisites
 
 - **Elixir** and **Mix**: Install via [elixir-lang.org](https://elixir-lang.org/install.html).
-- **Credo** (optional): Add to mix.exs deps and run `mix deps.get`; used by `/run-credo` command.
+- **Credo** (optional): Add to mix.exs deps and run `mix deps.get`; used by `/run-credo-elixir` command.
 - **jq** or **python3** (optional): Used by the format hook to parse JSON. If neither is available, the hook skips formatting.
 
 ## Structure
@@ -40,10 +40,10 @@ Slash commands triggered manually with `/` in chat.
 
 | Command | Description | Sub-agent |
 |---------|-------------|-----------|
-| `/run-tests` | Run tests and fix failures | `elixir-tester` |
+| `/run-tests-elixir` | Run tests and fix failures | `elixir-tester` |
 | `/code-review-elixir` | Review Elixir code for style, idioms, and maintainability | `elixir-code-reviewer` |
-| `/run-credo` | Run Credo and fix or document warnings | — |
-| `/run-format` | Format code with mix format | — |
+| `/run-credo-elixir` | Run Credo and fix or document warnings | — |
+| `/run-format-elixir` | Format code with mix format | — |
 
 Commands with a sub-agent run in a forked context (`context: fork`) for isolation.
 
@@ -80,7 +80,7 @@ Hook configuration is in `.claude/settings.json`. See [Hooks documentation](http
 
 ## CLAUDE.md and verification
 
-`CLAUDE.md` is kept short and focuses on principles, directory layout, tooling, **verification** (run `mix test` and `mix credo` after changes), workflows, and code review categories. Detailed style lives in the linked style guide and in `.cursor/rules/` if you use Cursor too. After code changes, the agent should run tests and Credo to verify; use `/run-tests` and `/run-credo` when appropriate.
+`CLAUDE.md` is kept short and focuses on principles, directory layout, tooling, **verification** (run `mix test` and `mix credo` after changes), workflows, and code review categories. Detailed style lives in the linked style guide and in `.cursor/rules/` if you use Cursor too. After code changes, the agent should run tests and Credo to verify; use `/run-tests-elixir` and `/run-credo-elixir` when appropriate.
 
 ## Comparison with Cursor Configuration
 

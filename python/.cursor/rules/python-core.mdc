@@ -25,7 +25,7 @@ alwaysApply: true
 - **Lint**: Use Ruff linter; fix or allow with justification when necessary.
 - **Typecheck**: Run `mypy src` or `pyright` (or project script) after code changes.
 - **Tests**: Use pytest; keep tests per project convention (`tests/`, `test_*.py`).
-- **Verification**: After code changes, run typecheck, tests, and lint to confirm no regressions. Use `/run-typecheck`, `/run-tests`, and `/run-lint` when available.
+- **Verification**: After code changes, run typecheck, tests, and lint to confirm no regressions. Use `/run-typecheck-python`, `/run-tests-python`, and `/run-lint-python` when available.
 
 ## Planning (Cursor)
 

@@ -16,4 +16,4 @@ user-invocable: false
 
 1. **Preserve behaviour**: Do not change observable behaviour; rely on existing tests.
 2. **Small steps**: Prefer incremental changes; run typecheck, tests, and lint after each logical step.
-3. **Verification**: After refactor, run typecheck, tests, and lint and confirm no new failures. Use `/run-typecheck`, `/run-tests`, `/run-lint` when available.
+3. **Verification**: After refactor, run typecheck, tests, and lint and confirm no new failures. Use `/run-typecheck-python`, `/run-tests-python`, `/run-lint-python` when available.

@@ -11,7 +11,7 @@ This repo includes both `.cursor` and `.claude` so you can use either editor; co
 
 ## Best practices (built into this template)
 
-- **Verification**: After code changes, run tests (`bundle exec rspec` or `bin/rails test`) and RuboCop (`bundle exec rubocop`). Use `/run-tests` and `/run-rubocop` (or equivalent) so the agent can verify its own work.
+- **Verification**: After code changes, run tests (`bundle exec rspec` or `bin/rails test`) and RuboCop (`bundle exec rubocop`). Use `/run-tests-rails` and `/run-rubocop-rails` (or equivalent) so the agent can verify its own work.
 - **Style**: Style is enforced by RuboCop; detailed conventions live in `.cursor/rules/` (Cursor) or in CLAUDE.md references and linked style guides (Claude Code). Avoid pasting full style guides into instructions.
 - **Planning**: For large or multi-file changes, use Plan Mode (Cursor) or a plan-first workflow so the agent implements with a clear, approved plan.
 

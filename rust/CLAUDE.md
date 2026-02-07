@@ -28,8 +28,8 @@
 
 After code changes, verify with:
 
-- **Tests**: `cargo test` (optionally with filter or `--doc`). Use `/run-tests` when available.
-- **Clippy**: `cargo clippy`; use `/run-clippy` when available.
+- **Tests**: `cargo test` (optionally with filter or `--doc`). Use `/run-tests-rust` when available.
+- **Clippy**: `cargo clippy`; use `/run-clippy-rust` when available.
 - **Format**: `cargo fmt` or rely on the format hook if using Cursor.
 
 ## Reference

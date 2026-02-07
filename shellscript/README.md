@@ -28,7 +28,7 @@ This template expects [ShellCheck](https://www.shellcheck.net/) for linting and 
 
 ## Best practices (built into this template)
 
-- **Verification**: After code changes, run lint (`shellcheck`), format (`shfmt`), and tests when present. Use `/run-lint`, `/run-format`, and `/run-tests` when available so the agent can verify its own work.
+- **Verification**: After code changes, run lint (`shellcheck`), format (`shfmt`), and tests when present. Use `/run-lint-shellscript`, `/run-format-shellscript`, and `/run-tests-shellscript` when available so the agent can verify its own work.
 - **Style**: Style and idioms are defined in `.cursor/rules/` (Cursor) or in CLAUDE.md (Claude Code). Enforce with ShellCheck; avoid pasting full style guides into instructions.
 - **Planning**: For large or multi-file changes, use Plan Mode (Cursor) or a plan-first workflow so the agent implements with a clear, approved plan.
 

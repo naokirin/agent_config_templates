@@ -34,7 +34,7 @@
 After making code changes, verify with:
 
 - **Tests**: Run the relevant tests (`bundle exec rspec [path]` or `bin/rails test`). Prefer single files or scoped paths for speed when appropriate.
-- **RuboCop**: Run `bundle exec rubocop [path]` and fix offenses. Use `/run-tests` and `/run-rubocop` (or equivalent commands) to drive verification.
+- **RuboCop**: Run `bundle exec rubocop [path]` and fix offenses. Use `/run-tests-rails` and `/run-rubocop-rails` (or equivalent commands) to drive verification.
 
 ## Reference
 

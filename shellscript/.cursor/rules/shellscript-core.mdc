@@ -24,7 +24,7 @@ alwaysApply: true
 - **Format**: Use shfmt per project (e.g. `-i 2 -ci`). Run before committing.
 - **Lint**: Use ShellCheck; fix or allow with justification when necessary.
 - **Tests**: Use bats or shunit2 when present; keep tests in `tests/` per project convention.
-- **Verification**: After code changes, run shellcheck and format (and tests when available). Use `/run-lint`, `/run-format`, and `/run-tests` when available.
+- **Verification**: After code changes, run shellcheck and format (and tests when available). Use `/run-lint-shellscript`, `/run-format-shellscript`, and `/run-tests-shellscript` when available.
 
 ## Planning (Cursor)
 

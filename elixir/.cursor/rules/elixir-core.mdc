@@ -27,7 +27,7 @@ alwaysApply: true
 - **Format**: Use `mix format` (default config or `.formatter.exs`). Run before committing.
 - **Lint**: Use `mix credo` when available for additional checks. Fix or allow with justification.
 - **Tests**: `mix test` for unit and integration tests; keep tests in `test/` mirroring `lib/` structure.
-- **Verification**: After code changes, run `mix test` and `mix credo` to confirm no regressions or new warnings. Use `/run-tests` and `/run-credo` (or equivalent) when available.
+- **Verification**: After code changes, run `mix test` and `mix credo` to confirm no regressions or new warnings. Use `/run-tests-elixir` and `/run-credo-elixir` (or equivalent) when available.
 
 ## Planning (Cursor)
 

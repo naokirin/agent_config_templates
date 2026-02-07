@@ -42,8 +42,8 @@ This template is provided alongside a Claude Code configuration (`.claude` + `CL
 
 ## Commands
 
-- `/run-tests` — Run Unity tests and fix failures (delegates to **unity-tester** agent).
-- `/run-format` — Run dotnet format on C# when .sln exists.
+- `/run-tests-unity` — Run Unity tests and fix failures (delegates to **unity-tester** agent).
+- `/run-format-unity` — Run dotnet format on C# when .sln exists.
 - `/code-review-unity` — Review Unity/C# code for style, conventions, and maintainability (delegates to **unity-code-reviewer** agent).
 
 ## Agents (subagents)

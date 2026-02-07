@@ -46,7 +46,7 @@ This template expects [Ruff](https://docs.astral.sh/ruff/) for linting and forma
 
 ## Best practices (built into this template)
 
-- **Verification**: After code changes, run typecheck (`mypy`/`pyright`), tests (`pytest`), and lint (`ruff check`). Use `/run-tests`, `/run-lint`, and `/run-format` when available so the agent can verify its own work.
+- **Verification**: After code changes, run typecheck (`mypy`/`pyright`), tests (`pytest`), and lint (`ruff check`). Use `/run-tests-python`, `/run-lint-python`, and `/run-format-python` when available so the agent can verify its own work.
 - **Style**: Style and idioms are defined in `.cursor/rules/` (Cursor) or in CLAUDE.md and the linked references (Claude Code). Enforce with Ruff; avoid pasting full style guides into instructions.
 - **Planning**: For large or multi-file changes, use Plan Mode (Cursor) or a plan-first workflow so the agent implements with a clear, approved plan.
 

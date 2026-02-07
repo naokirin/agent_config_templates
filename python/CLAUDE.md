@@ -17,7 +17,7 @@
 
 ### Introducing Ruff and type checking
 
-To add Ruff and type checking: add to `pyproject.toml` under `[tool.ruff]` and `[tool.mypy]` (or `[tool.pyright]`). Example scripts: `ruff check .`, `ruff format .`, `pytest`, `mypy src` or `pyright`. The format hook and `/run-lint` / `/run-format` use these when available.
+To add Ruff and type checking: add to `pyproject.toml` under `[tool.ruff]` and `[tool.mypy]` (or `[tool.pyright]`). Example scripts: `ruff check .`, `ruff format .`, `pytest`, `mypy src` or `pyright`. The format hook and `/run-lint-python` / `/run-format-python` use these when available.
 
 ## Tooling and Style
 
@@ -31,10 +31,10 @@ To add Ruff and type checking: add to `pyproject.toml` under `[tool.ruff]` and `
 
 After code changes, verify with:
 
-- **Typecheck**: `mypy src` or `pyright` (or `python -m pyright`). Use `/run-typecheck` when available.
-- **Tests**: `pytest` (optionally with path or `-k` pattern). Use `/run-tests` when available.
-- **Lint**: `ruff check .` (optionally `--fix`); use `/run-lint` when available.
-- **Format**: `ruff format .` or `black .`; use `/run-format` when available.
+- **Typecheck**: `mypy src` or `pyright` (or `python -m pyright`). Use `/run-typecheck-python` when available.
+- **Tests**: `pytest` (optionally with path or `-k` pattern). Use `/run-tests-python` when available.
+- **Lint**: `ruff check .` (optionally `--fix`); use `/run-lint-python` when available.
+- **Format**: `ruff format .` or `black .`; use `/run-format-python` when available.
 
 ## Reference
 

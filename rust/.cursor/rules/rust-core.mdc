@@ -27,7 +27,7 @@ alwaysApply: true
 - **Format**: Use `rustfmt` (default config or `rustfmt.toml`). Run before committing.
 - **Lint**: Use `cargo clippy` for additional lints. Fix or allow with justification.
 - **Tests**: `cargo test` for unit and integration tests; keep tests close to code or in `tests/`.
-- **Verification**: After code changes, run `cargo test` and `cargo clippy` to confirm no regressions or new warnings. Use `/run-tests` and `/run-clippy` (or equivalent) when available.
+- **Verification**: After code changes, run `cargo test` and `cargo clippy` to confirm no regressions or new warnings. Use `/run-tests-rust` and `/run-clippy-rust` (or equivalent) when available.
 
 ## Planning (Cursor)
 

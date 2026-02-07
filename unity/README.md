@@ -11,7 +11,7 @@ This repo includes both `.cursor` and `.claude` so you can use either editor; co
 
 ## Best practices (built into this template)
 
-- **Verification**: After code changes, run tests (Unity Test Framework) and, when available, `dotnet format`. Use `/run-tests` and `/run-format` so the agent can verify its own work.
+- **Verification**: After code changes, run tests (Unity Test Framework) and, when available, `dotnet format`. Use `/run-tests-unity` and `/run-format-unity` so the agent can verify its own work.
 - **Style**: Conventions are documented in `.cursor/rules/` (Cursor) or in CLAUDE.md and linked guides (Claude Code). Use EditorConfig or dotnet format where applicable; avoid pasting full style guides into instructions.
 - **Planning**: For large or multi-file changes, use Plan Mode (Cursor) or a plan-first workflow so the agent implements with a clear, approved plan.
 

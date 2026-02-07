@@ -33,8 +33,8 @@
 
 After code changes, verify with:
 
-- **Tests**: `mix test` (optionally with path or `--only`). Use `/run-tests` when available.
-- **Credo**: `mix credo`; use `/run-credo` when available.
+- **Tests**: `mix test` (optionally with path or `--only`). Use `/run-tests-phoenix` when available.
+- **Credo**: `mix credo`; use `/run-credo-phoenix` when available.
 - **Format**: `mix format` or rely on the format hook if using Cursor.
 - **Compile**: `mix compile --warnings-as-errors` when you want to treat warnings as failures.
 

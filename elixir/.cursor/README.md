@@ -8,7 +8,7 @@ This directory is a Cursor configuration template for Elixir projects. Copy it t
 |------|-------------|
 | **rules/** | Always-applied and glob-based rules (elixir-core, elixir-style, elixir-idioms, exunit-style) |
 | **skills/** | Skills for Elixir development, refactoring, and ExUnit testing (auto-loaded when relevant) |
-| **commands/** | Slash commands: run-tests, run-credo, run-format, code-review-elixir |
+| **commands/** | Slash commands: run-tests-elixir, run-credo-elixir, run-format-elixir, code-review-elixir |
 | **agents/** | Agent descriptions for elixir-tester and elixir-code-reviewer |
 | **hooks/** | format-elixir.sh runs after editing .ex / .exs files |
 | **hooks.json** | Hook configuration (afterFileEdit → format-elixir.sh) |
@@ -22,5 +22,5 @@ This directory is a Cursor configuration template for Elixir projects. Copy it t
 ## Prerequisites
 
 - **Elixir** and **Mix**: Install via [elixir-lang.org](https://elixir-lang.org/install.html).
-- **Credo** (optional): Add to mix.exs deps and run `mix deps.get`; used by `/run-credo`.
+- **Credo** (optional): Add to mix.exs deps and run `mix deps.get`; used by `/run-credo-elixir`.
 - **jq** or **python3** (optional): Used by the format hook to parse JSON. If neither is available, the hook skips formatting.

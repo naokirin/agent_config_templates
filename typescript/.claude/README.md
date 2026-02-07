@@ -8,8 +8,8 @@ This template is provided alongside a Cursor configuration (`.cursor`) in the sa
 
 - **Node.js** and **npm** (or pnpm/yarn): Install via [nodejs.org](https://nodejs.org/).
 - **TypeScript**: Add as devDependency; ensure `tsconfig.json` exists.
-- **Biome** (optional): Add to devDependencies; used by `/run-lint`, `/run-format`, and the format hook. See the repo root **README.md** (section “Introducing Biome”) for install and `npx biome init` steps.
-- **Vitest or Jest** (optional): Add test runner to devDependencies; used by `/run-tests`.
+- **Biome** (optional): Add to devDependencies; used by `/run-lint-typescript`, `/run-format-typescript`, and the format hook. See the repo root **README.md** (section “Introducing Biome”) for install and `npx biome init` steps.
+- **Vitest or Jest** (optional): Add test runner to devDependencies; used by `/run-tests-typescript`.
 - **jq** or **python3** (optional): Used by the format hook to parse JSON. If neither is available, the hook skips formatting.
 
 ## Structure
@@ -42,11 +42,11 @@ Slash commands triggered manually with `/` in chat.
 
 | Command | Description | Sub-agent |
 |---------|-------------|-----------|
-| `/run-tests` | Run tests and fix failures | `typescript-tester` |
+| `/run-tests-typescript` | Run tests and fix failures | `typescript-tester` |
 | `/code-review-typescript` | Review TypeScript code for style, types, and maintainability | `typescript-code-reviewer` |
-| `/run-lint` | Run Biome linter and fix auto-fixable issues | — |
-| `/run-format` | Format code with Biome | — |
-| `/run-typecheck` | Run TypeScript type checker | — |
+| `/run-lint-typescript` | Run Biome linter and fix auto-fixable issues | — |
+| `/run-format-typescript` | Format code with Biome | — |
+| `/run-typecheck-typescript` | Run TypeScript type checker | — |
 
 Commands with a sub-agent run in a forked context (`context: fork`) for isolation.
 
@@ -83,7 +83,7 @@ Hook configuration is in `.claude/settings.json`. See [Hooks documentation](http
 
 ## CLAUDE.md and verification
 
-`CLAUDE.md` is kept short and focuses on principles, directory layout, tooling, **verification** (run typecheck, tests, and lint after changes), workflows, and code review categories. Detailed style lives in the linked references and in `.cursor/rules/` if you use Cursor too. After code changes, the agent should run typecheck, tests, and lint to verify; use `/run-typecheck`, `/run-tests`, and `/run-lint` when appropriate.
+`CLAUDE.md` is kept short and focuses on principles, directory layout, tooling, **verification** (run typecheck, tests, and lint after changes), workflows, and code review categories. Detailed style lives in the linked references and in `.cursor/rules/` if you use Cursor too. After code changes, the agent should run typecheck, tests, and lint to verify; use `/run-typecheck-typescript`, `/run-tests-typescript`, and `/run-lint-typescript` when appropriate.
 
 ## Comparison with Cursor Configuration
 

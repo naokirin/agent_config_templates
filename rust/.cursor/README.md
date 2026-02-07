@@ -43,9 +43,9 @@ This template is provided alongside a Claude Code configuration (`.claude` + `CL
 
 ## Commands
 
-- **/run-tests** — Run tests and fix failures (delegates to **rust-tester** agent).
-- **/run-clippy** — Run Clippy and fix or document warnings.
-- **/run-rustfmt** — Format code with rustfmt.
+- **/run-tests-rust** — Run tests and fix failures (delegates to **rust-tester** agent).
+- **/run-clippy-rust** — Run Clippy and fix or document warnings.
+- **/run-rustfmt-rust** — Format code with rustfmt.
 - **/code-review-rust** — Review Rust code for style, safety, and maintainability (delegates to **rust-code-reviewer** agent).
 
 ## Agents (subagents)

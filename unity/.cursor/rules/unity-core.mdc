@@ -27,7 +27,7 @@ alwaysApply: true
 - **C# Style**: Follow csharp-style and unity-scripts rules. Use PascalCase for public and [SerializeField] members; camelCase for private fields.
 - **Format**: Use `dotnet format` when project has SDK-style .csproj; otherwise follow EditorConfig/project conventions.
 - **Tests**: Use Unity Test Framework (NUnit). Run tests after code changes to confirm no regressions.
-- **Verification**: After code changes, ensure project compiles and run relevant tests. Use `/run-tests` and `/run-format` when available.
+- **Verification**: After code changes, ensure project compiles and run relevant tests. Use `/run-tests-unity` and `/run-format-unity` when available.
 
 ## Planning (Cursor)
 

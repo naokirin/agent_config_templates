@@ -28,8 +28,8 @@
 
 After code changes, verify with:
 
-- **Tests**: `mix test` (optionally with path or `--only`). Use `/run-tests` when available.
-- **Credo**: `mix credo`; use `/run-credo` when available.
+- **Tests**: `mix test` (optionally with path or `--only`). Use `/run-tests-elixir` when available.
+- **Credo**: `mix credo`; use `/run-credo-elixir` when available.
 - **Format**: `mix format` or rely on the format hook if using Cursor.
 
 ## Reference

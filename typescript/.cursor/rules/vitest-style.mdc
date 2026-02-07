@@ -11,4 +11,4 @@ alwaysApply: false
 - **Assertions**: Prefer explicit expectations (e.g. `expect(x).toBe(y)`). Use the most specific matcher available (`toEqual`, `toStrictEqual`, `toThrow`). Keep expected values as literals or named constants when they aid readability.
 - **Setup**: Use `beforeEach`/`beforeAll` for shared setup; clean up in `afterEach`/`afterAll` when needed. Prefer fresh state per test to avoid order-dependent failures. Mock only when necessary; prefer real dependencies for integration-style tests when fast enough.
 - **Async**: Use `async`/`await` in tests; avoid raw `.then()`. For async assertions, await the result or use `expect(...).resolves`/`rejects` as appropriate.
-- **Coverage**: Focus tests on behaviour and boundaries; avoid testing implementation details. Run the test script to verify; use `/run-tests` when available.
+- **Coverage**: Focus tests on behaviour and boundaries; avoid testing implementation details. Run the test script to verify; use `/run-tests-typescript` when available.
