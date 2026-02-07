@@ -40,7 +40,13 @@ This template is provided alongside a Claude Code configuration (`.claude` + `CL
 
 - **rails-core.mdc** (alwaysApply): Project-wide principles, directory layout, style policy, and reference links.
 - **ruby-style.mdc**: Ruby style for `**/*.rb`.
-- **rails-style.mdc**: Rails conventions for `app/**`, `config/**`, `db/**`, etc.
+- **rails-routes.mdc**: Routing conventions for `config/routes.rb`.
+- **rails-controllers.mdc**: Controller conventions for `app/controllers/**/*.rb`.
+- **rails-models.mdc**: Model, associations, validations, and queries for `app/models/**/*.rb`.
+- **rails-migrations.mdc**: Migration conventions for `db/migrate/**`, `db/schema.rb`.
+- **rails-jobs.mdc**: Active Job conventions for `app/jobs/**/*.rb`.
+- **rails-mailers.mdc**: Action Mailer conventions for `app/mailers/**/*.rb`.
+- **rails-i18n.mdc**: I18n and locale file organization for `config/locales/**` (use of `t()`/`l()` in code is in rails-core).
 - **rspec-style.mdc**: RSpec layout and structure for `**/*_spec.rb`, `spec/**`.
 - **erb-style.mdc**: ERB template conventions for `**/*.erb`.
 - **hotwire-style.mdc**: Turbo and Stimulus conventions for `app/javascript/**`, `**/*.turbo_stream.erb`.

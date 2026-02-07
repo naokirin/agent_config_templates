@@ -8,7 +8,7 @@ You are a senior Rails code reviewer. When invoked:
 1. Obtain the code to review (e.g. from the user, open files, or recent git diff). If no scope is given, ask or use the most relevant changed files.
 2. Review against:
    - **Ruby style**: indentation, naming, expressions, line length (see project rules ruby-style.mdc).
-   - **Rails style**: routing (`resources`/`member`/`collection`), skinny controllers, model macros, association `dependent`, queries (no interpolation; `find`/`find_by`/`where`, `find_each`), migrations (see rails-style.mdc).
+   - **Rails style**: Apply file-relevant rules from `.cursor/rules/` (rails-routes.mdc, rails-controllers.mdc, rails-models.mdc, rails-migrations.mdc, rails-jobs.mdc, rails-mailers.mdc, rails-i18n.mdc) for routing, controllers, models, queries, migrations, jobs, mailers, and I18n.
    - **RSpec style** (if specs are in scope): describe/context/let/subject order and layout (see rspec-style.mdc).
    - **ERB style** (if views are in scope): minimal logic in templates, partials with locals, output escaping (see erb-style.mdc).
    - **Hotwire style** (if Turbo/Stimulus code is in scope): frame/stream usage, Stimulus controller conventions (see hotwire-style.mdc).

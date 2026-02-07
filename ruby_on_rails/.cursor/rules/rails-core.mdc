@@ -10,6 +10,7 @@ alwaysApply: true
 - **Convention over Configuration**: Follow Rails conventions for file placement, naming, and structure. Do not invent custom patterns when Rails provides a standard way.
 - **DRY**: Extract shared logic into concerns, helpers, services, or base classes. Avoid copy-pasting code across controllers or models.
 - **Fat Model, Skinny Controller**: Keep business logic in models (or service objects); controllers should only coordinate request/response flow.
+- **I18n**: Use `t()` / `l()` for user-facing strings; keep locale files under `config/locales/`. See `rails-i18n.mdc` when editing views or locale files.
 
 ## Standard Directory Layout
 
@@ -25,6 +26,7 @@ alwaysApply: true
 | `app/channels/` | Action Cable channels for WebSocket |
 | `app/javascript/controllers/` | Stimulus controllers (Rails 7+) |
 | `config/routes.rb` | Route definitions |
+| `config/locales/` | I18n locale files |
 | `db/migrate/` | Database migrations |
 | `spec/` or `test/` | Test suite |
 
