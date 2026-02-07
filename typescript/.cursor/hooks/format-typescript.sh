@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-# Format edited TypeScript/JavaScript files with Prettier when available.
-# Receives JSON on stdin from Cursor's afterFileEdit hook; extracts file_path and runs Prettier.
+# Format edited TypeScript/JavaScript files with Biome when available.
+# Receives JSON on stdin from Cursor's afterFileEdit hook; extracts file_path and runs Biome format.
 set -euo pipefail
 input=$(cat)
 
@@ -24,6 +24,6 @@ esac
 
 root="${CURSOR_PROJECT_DIR:-.}"
 if [[ -f "$root/package.json" ]] && command -v npx &>/dev/null; then
-  (cd "$root" && npx prettier --write "$file_path" 2>/dev/null) || true
+  (cd "$root" && npx biome format --write "$file_path" 2>/dev/null) || true
 fi
 exit 0

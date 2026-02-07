@@ -8,8 +8,7 @@ This template is provided alongside a Cursor configuration (`.cursor`) in the sa
 
 - **Node.js** and **npm** (or pnpm/yarn): Install via [nodejs.org](https://nodejs.org/).
 - **TypeScript**: Add as devDependency; ensure `tsconfig.json` exists.
-- **ESLint** (optional): Add to devDependencies and config; used by `/run-eslint` command.
-- **Prettier** (optional): Add to devDependencies; used by the format hook and `/run-format`.
+- **Biome** (optional): Add to devDependencies; used by `/run-lint`, `/run-format`, and the format hook. See the repo root **README.md** (section “Introducing Biome”) for install and `npx biome init` steps.
 - **Vitest or Jest** (optional): Add test runner to devDependencies; used by `/run-tests`.
 - **jq** or **python3** (optional): Used by the format hook to parse JSON. If neither is available, the hook skips formatting.
 
@@ -21,7 +20,7 @@ This template is provided alongside a Cursor configuration (`.cursor`) in the sa
 | **.claude/agents/** | Custom sub-agents (typescript-tester, typescript-code-reviewer) |
 | **.claude/skills/** | Skills for TypeScript development, refactoring, and testing (auto-loaded when relevant) |
 | **.claude/commands/** | Slash commands run from chat with `/` |
-| **.claude/hooks/** | Hook scripts (e.g. Prettier after file edit) |
+| **.claude/hooks/** | Hook scripts (e.g. Biome format after file edit) |
 | **.claude/settings.json** | Hook configuration |
 
 ## Usage
@@ -45,8 +44,8 @@ Slash commands triggered manually with `/` in chat.
 |---------|-------------|-----------|
 | `/run-tests` | Run tests and fix failures | `typescript-tester` |
 | `/code-review-typescript` | Review TypeScript code for style, types, and maintainability | `typescript-code-reviewer` |
-| `/run-eslint` | Run ESLint and fix auto-fixable issues | — |
-| `/run-format` | Format code with Prettier | — |
+| `/run-lint` | Run Biome linter and fix auto-fixable issues | — |
+| `/run-format` | Format code with Biome | — |
 | `/run-typecheck` | Run TypeScript type checker | — |
 
 Commands with a sub-agent run in a forked context (`context: fork`) for isolation.
@@ -78,13 +77,13 @@ Skill files are in `.claude/skills/<name>/SKILL.md`. See [Skills documentation](
 
 | Event | Matcher | Script | Description |
 |-------|---------|--------|-------------|
-| PostToolUse | `Edit\|Write` | `format-typescript.sh` | Runs Prettier on `.ts`/`.tsx`/`.js`/`.jsx` files after edit/write. No-op if Prettier or npx is not available. |
+| PostToolUse | `Edit\|Write` | `format-typescript.sh` | Runs Biome format on `.ts`/`.tsx`/`.js`/`.jsx` files after edit/write. No-op if Biome or npx is not available. |
 
 Hook configuration is in `.claude/settings.json`. See [Hooks documentation](https://code.claude.com/docs/hooks-guide).
 
 ## CLAUDE.md and verification
 
-`CLAUDE.md` is kept short and focuses on principles, directory layout, tooling, **verification** (run typecheck, tests, and lint after changes), workflows, and code review categories. Detailed style lives in the linked references and in `.cursor/rules/` if you use Cursor too. After code changes, the agent should run typecheck, tests, and lint to verify; use `/run-typecheck`, `/run-tests`, and `/run-eslint` when appropriate.
+`CLAUDE.md` is kept short and focuses on principles, directory layout, tooling, **verification** (run typecheck, tests, and lint after changes), workflows, and code review categories. Detailed style lives in the linked references and in `.cursor/rules/` if you use Cursor too. After code changes, the agent should run typecheck, tests, and lint to verify; use `/run-typecheck`, `/run-tests`, and `/run-lint` when appropriate.
 
 ## Comparison with Cursor Configuration
 

@@ -25,4 +25,4 @@ user-invocable: false
 - `npm run typecheck` or `npx tsc --noEmit`.
 - `npm test` (or project test command).
 - `npm run lint` when available (fix or allow with justification).
-- `npm run format` or Prettier (or rely on the format hook).
+- `npm run format` or Biome (or rely on the format hook).

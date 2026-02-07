@@ -16,14 +16,17 @@
 | `test/` or `__tests__/` or `*.test.ts` | Unit/integration tests |
 | `package.json` | Dependencies and scripts |
 | `tsconfig.json` | TypeScript compiler options; recommend `compilerOptions.strict: true` |
-| `eslint.config.*` or `.eslintrc.*` | ESLint configuration |
-| `.prettierrc` or `prettier.config.*` | Prettier configuration |
+| `biome.json` | Biome configuration (linter and formatter) |
+
+### Introducing Biome
+
+To add Biome to a project: install with `npm install -D @biomejs/biome`, then run `npx biome init` to create `biome.json`. Add scripts: `"lint": "biome lint ."`, `"lint:fix": "biome lint --write ."`, `"format": "biome format --write ."`. The format hook and `/run-lint` / `/run-format` use these when available.
 
 ## Tooling and Style
 
-- **Style**: Follow project rules in `.cursor/rules/` if present (typescript-core, typescript-style, typescript-idioms). Prefer ESLint and Prettier over pasting full style guides into instructions.
-- **Format**: Use Prettier (project config or default). Run before committing; use the format hook when available.
-- **Lint**: Use ESLint; fix or disable with justification when necessary.
+- **Style**: Follow project rules in `.cursor/rules/` if present (typescript-core, typescript-style, typescript-idioms). Prefer Biome over pasting full style guides into instructions.
+- **Format**: Use Biome formatter (project config or default). Run before committing; use the format hook when available.
+- **Lint**: Use Biome linter; fix or disable with justification when necessary.
 - **Typecheck**: Run `npm run typecheck` or `tsc --noEmit` (or equivalent) after code changes.
 - **Tests**: Use Vitest, Jest, or project test runner; keep tests next to code or in a dedicated test directory per project convention.
 
@@ -33,15 +36,14 @@ After code changes, verify with:
 
 - **Typecheck**: `npm run typecheck` or `npx tsc --noEmit`. Use `/run-typecheck` when available.
 - **Tests**: `npm test` or `npm run test` (optionally with path or pattern). Use `/run-tests` when available.
-- **Lint**: `npm run lint` or `npx eslint .`; use `/run-eslint` when available.
-- **Format**: `npm run format` or `npx prettier --write .`; use `/run-format` when available.
+- **Lint**: `npm run lint` or `npx biome lint .` (optionally `--write` to fix); use `/run-lint` when available.
+- **Format**: `npm run format` or `npx biome format --write .`; use `/run-format` when available.
 
 ## Reference
 
 - [TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/)
 - [TypeScript Deep Dive](https://basarat.gitbook.io/typescript/)
-- [ESLint TypeScript](https://typescript-eslint.io/)
-- [Prettier](https://prettier.io/docs/en/)
+- [Biome](https://biomejs.dev/)
 - [Vitest](https://vitest.dev/) / [Jest](https://jestjs.io/)
 
 ---

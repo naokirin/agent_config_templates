@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Format edited TypeScript/JavaScript files with Prettier when available.
+# Format edited TypeScript/JavaScript files with Biome when available.
 # Triggered by Claude Code PostToolUse hook for Edit/Write tools.
 # Receives JSON on stdin with tool_input.file_path.
 set -euo pipefail
@@ -35,7 +35,7 @@ esac
 root="${CLAUDE_PROJECT_DIR:-.}"
 if [[ -f "$root/package.json" ]]; then
   if command -v npx &>/dev/null; then
-    (cd "$root" && npx prettier --write "$file_path" 2>/dev/null) || true
+    (cd "$root" && npx biome format --write "$file_path" 2>/dev/null) || true
   fi
 fi
 exit 0
