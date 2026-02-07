@@ -4,17 +4,17 @@ Templates for agents, commands, skills, and rules for Claude Code and Cursor.
 
 ## Templates
 
-| Template        | Description |
-|-----------------|-------------|
+| Template        | Description                                                                                                                                                                      |
+| --------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `general`       | Language-agnostic (rules, agents, /plan, /code-review). Created with reference to generic parts of [everything-claude-code](https://github.com/affaan-m/everything-claude-code). |
-| `python`        | Python (pytest, ruff, mypy, etc.) |
-| `elixir`        | Elixir (ExUnit, Credo, format, etc.) |
-| `phoenix`       | Phoenix (Ecto, LiveView, etc.) |
-| `ruby_on_rails` | Ruby on Rails (RSpec, RuboCop, etc.) |
-| `rust`          | Rust (clippy, rustfmt, cargo test, etc.) |
-| `shellscript`   | Shell script (bats, shellcheck, shfmt) |
-| `typescript`    | TypeScript |
-| `unity`         | Unity (C#) |
+| `python`        | Python (pytest, ruff, mypy, etc.)                                                                                                                                                |
+| `elixir`        | Elixir (ExUnit, Credo, format, etc.)                                                                                                                                             |
+| `phoenix`       | Phoenix (Ecto, LiveView, etc.)                                                                                                                                                   |
+| `ruby_on_rails` | Ruby on Rails (RSpec, RuboCop, etc.)                                                                                                                                             |
+| `rust`          | Rust (clippy, rustfmt, cargo test, etc.)                                                                                                                                         |
+| `shellscript`   | Shell script (bats, shellcheck, shfmt)                                                                                                                                           |
+| `typescript`    | TypeScript                                                                                                                                                                       |
+| `unity`         | Unity (C#)                                                                                                                                                                       |
 
 ## Applying templates to another repository
 

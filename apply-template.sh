@@ -87,6 +87,7 @@ MERGE_JQ_EXPR=(
   '($t[0] | .hooks.afterFileEdit = (($t[0].hooks.afterFileEdit // []) + ($s[0].hooks.afterFileEdit // [])))'
 )
 
+# Prompts: capital letter = default ([Y/n] = default Yes, [y/N] = default No)
 MERGE_DO=()
 for i in "${!MERGE_REL_PATHS[@]}"; do
   rel="${MERGE_REL_PATHS[$i]}"
@@ -105,14 +106,13 @@ for i in "${MERGE_DO[@]}"; do
   MERGE_PATHS_DO+=( "${MERGE_REL_PATHS[$i]}" )
 done
 
-# Overwrite confirmation: exclude files we are merging from the list
+# Overwrite confirmation: exclude files we are merging, and README.md (we never copy it)
 OVERWRITE_LIST=()
 for rel in "${CONFLICTS[@]}"; do
-  skip=0
   for m in "${MERGE_PATHS_DO[@]}"; do
-    [[ "$rel" == "$m" ]] && { skip=1; break; }
+    [[ "$rel" == "$m" ]] && continue 2
   done
-  [[ $skip -eq 1 ]] && continue
+  [[ "${rel##*/}" == "README.md" ]] && continue
   OVERWRITE_LIST+=("$rel")
 done
 
