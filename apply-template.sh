@@ -128,7 +128,8 @@ if [[ $MERGE_HOOKS -eq 1 ]]; then
 fi
 
 echo "Applying: $TEMPLATE_NAME -> $TARGET_DIR"
-(cd "$SOURCE_DIR" && tar cf - .) | (cd "$TARGET_DIR" && tar xf -)
+# Exclude README.md; this script only applies Cursor/Claude Code config, not project docs
+(cd "$SOURCE_DIR" && tar cf - --exclude='README.md' .) | (cd "$TARGET_DIR" && tar xf -)
 
 # Merge with jq when merge was chosen
 if [[ $MERGE_SETTINGS -eq 1 ]] || [[ $MERGE_HOOKS -eq 1 ]]; then
