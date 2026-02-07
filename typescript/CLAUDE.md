@@ -15,7 +15,7 @@
 | `src/**/*.tsx` | React/JSX components (if applicable) |
 | `test/` or `__tests__/` or `*.test.ts` | Unit/integration tests |
 | `package.json` | Dependencies and scripts |
-| `tsconfig.json` | TypeScript compiler options |
+| `tsconfig.json` | TypeScript compiler options; recommend `compilerOptions.strict: true` |
 | `eslint.config.*` or `.eslintrc.*` | ESLint configuration |
 | `.prettierrc` or `prettier.config.*` | Prettier configuration |
 
