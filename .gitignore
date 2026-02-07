@@ -1,5 +1,8 @@
 # tmp
 /tmp
 
+# Mac OS
+.DS_Store
+
 # Claude Code
 /.claude/settings.local.json

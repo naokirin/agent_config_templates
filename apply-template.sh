@@ -1,14 +1,13 @@
 #!/usr/bin/env bash
 #
-# agent_config_templates 適用スクリプト
-# https://github.com/naokirin/agent_config_templates からテンプレートを取得して適用します。
+# Apply agent_config_templates from https://github.com/naokirin/agent_config_templates
 #
-# 使い方:
+# Usage:
 #   ./apply-template.sh TEMPLATE_NAME [TARGET_DIR]
 #
-# 例:
-#   ./apply-template.sh python              # カレントディレクトリに python テンプレートを適用
-#   ./apply-template.sh python ./myproject  # myproject に python テンプレートを適用
+# Examples:
+#   ./apply-template.sh python              # Apply python template to current directory
+#   ./apply-template.sh python ./myproject  # Apply python template to myproject
 #
 
 set -e
@@ -18,51 +17,45 @@ BRANCH="${BRANCH:-main}"
 AVAILABLE_TEMPLATES="elixir phoenix python ruby_on_rails rust shellscript typescript unity"
 
 usage() {
-  echo "使い方: $0 TEMPLATE_NAME [TARGET_DIR]"
+  echo "Usage: $0 TEMPLATE_NAME [TARGET_DIR]"
   echo ""
-  echo "  TEMPLATE_NAME  適用するテンプレート名（必須）"
-  echo "                 利用可能: $AVAILABLE_TEMPLATES"
-  echo "  TARGET_DIR     適用先ディレクトリ（省略時: カレントディレクトリ）"
+  echo "  TEMPLATE_NAME  Template to apply (required). Available: $AVAILABLE_TEMPLATES"
+  echo "  TARGET_DIR     Target directory (default: current directory)"
   echo ""
-  echo "例:"
+  echo "Examples:"
   echo "  $0 python"
   echo "  $0 python ./myproject"
   exit 1
 }
 
-# 引数
 TEMPLATE_NAME="${1:-}"
 TARGET_DIR="${2:-.}"
 
 if [[ -z "$TEMPLATE_NAME" ]]; then
-  echo "エラー: TEMPLATE_NAME を指定してください。"
+  echo "Error: TEMPLATE_NAME is required."
   echo ""
   usage
 fi
 
-# テンプレート名の検証
 if [[ ! " $AVAILABLE_TEMPLATES " = *" $TEMPLATE_NAME "* ]]; then
-  echo "エラー: テンプレート '$TEMPLATE_NAME' は存在しません。"
-  echo "利用可能: $AVAILABLE_TEMPLATES"
+  echo "Error: Template '$TEMPLATE_NAME' not found."
+  echo "Available: $AVAILABLE_TEMPLATES"
   exit 1
 fi
 
-# 適用先を絶対パスに正規化
 if [[ ! -d "$TARGET_DIR" ]]; then
-  echo "エラー: 適用先ディレクトリが存在しません: $TARGET_DIR"
+  echo "Error: Target directory does not exist: $TARGET_DIR"
   exit 1
 fi
 TARGET_DIR="$(cd "$TARGET_DIR" && pwd)"
 
-# 一時ディレクトリでリポジトリを取得
 TMP_DIR=$(mktemp -d)
 trap 'rm -rf "$TMP_DIR"' EXIT
 
-echo "リポジトリを取得しています: $REPO_URL (branch: $BRANCH)"
+echo "Fetching repository: $REPO_URL (branch: $BRANCH)"
 if ! git clone --depth 1 --branch "$BRANCH" "$REPO_URL" "$TMP_DIR/repo" 2>/dev/null; then
-  # main が無い場合は master を試す
   if [[ "$BRANCH" == "main" ]]; then
-    echo "branch main に失敗したため master を試します。"
+    echo "Branch main failed, trying master."
     git clone --depth 1 --branch master "$REPO_URL" "$TMP_DIR/repo"
   else
     exit 1
@@ -71,11 +64,11 @@ fi
 
 SOURCE_DIR="$TMP_DIR/repo/$TEMPLATE_NAME"
 if [[ ! -d "$SOURCE_DIR" ]]; then
-  echo "エラー: テンプレート '$TEMPLATE_NAME' がリポジトリ内に見つかりません。"
+  echo "Error: Template '$TEMPLATE_NAME' not found in repository."
   exit 1
 fi
 
-# 上書き対象となる既存のパスを収集（SOURCE_DIR 内の各パスについて TARGET_DIR に存在するか）
+# Collect existing paths that would be overwritten
 CONFLICTS=()
 while IFS= read -r -d '' path; do
   rel="${path#$SOURCE_DIR/}"
@@ -85,20 +78,78 @@ while IFS= read -r -d '' path; do
   fi
 done < <(find "$SOURCE_DIR" -mindepth 1 -print0 2>/dev/null)
 
-if [[ ${#CONFLICTS[@]} -gt 0 ]]; then
+# Ask about merging first: .claude/settings.json and .cursor/hooks.json
+MERGE_SETTINGS=0
+MERGE_HOOKS=0
+if [[ -f "$TARGET_DIR/.claude/settings.json" ]] && [[ -f "$SOURCE_DIR/.claude/settings.json" ]]; then
   echo ""
-  echo "以下のファイル/ディレクトリが既に存在します:"
-  printf '  %s\n' "${CONFLICTS[@]}"
+  read -r -p ".claude/settings.json already exists. Merge with new template? [Y/n]: " reply
+  if [[ ! "$reply" =~ ^[nN]$ ]]; then
+    MERGE_SETTINGS=1
+  fi
+fi
+if [[ -f "$TARGET_DIR/.cursor/hooks.json" ]] && [[ -f "$SOURCE_DIR/.cursor/hooks.json" ]]; then
+  read -r -p ".cursor/hooks.json already exists. Merge with new template? [Y/n]: " reply
+  if [[ ! "$reply" =~ ^[nN]$ ]]; then
+    MERGE_HOOKS=1
+  fi
+fi
+
+# Overwrite confirmation: exclude files we are merging from the list
+OVERWRITE_LIST=()
+for rel in "${CONFLICTS[@]}"; do
+  if [[ $MERGE_SETTINGS -eq 1 && "$rel" == ".claude/settings.json" ]]; then
+    continue
+  fi
+  if [[ $MERGE_HOOKS -eq 1 && "$rel" == ".cursor/hooks.json" ]]; then
+    continue
+  fi
+  OVERWRITE_LIST+=("$rel")
+done
+
+if [[ ${#OVERWRITE_LIST[@]} -gt 0 ]]; then
   echo ""
-  read -r -p "上書きして適用しますか？ [y/N]: " reply
+  echo "The following files or directories already exist:"
+  printf '  %s\n' "${OVERWRITE_LIST[@]}"
+  echo ""
+  read -r -p "Overwrite and apply? [y/N]: " reply
   if [[ ! "$reply" =~ ^[yY]$ ]]; then
-    echo "中止しました。"
+    echo "Aborted."
     exit 0
   fi
 fi
 
-echo "適用中: $TEMPLATE_NAME -> $TARGET_DIR"
-# ドットファイル含めすべてコピー（tar でポータブルに実施）
+# Back up existing content when merging (tar will overwrite)
+if [[ $MERGE_SETTINGS -eq 1 ]]; then
+  cp "$TARGET_DIR/.claude/settings.json" "$TMP_DIR/target_settings.json"
+fi
+if [[ $MERGE_HOOKS -eq 1 ]]; then
+  cp "$TARGET_DIR/.cursor/hooks.json" "$TMP_DIR/target_hooks.json"
+fi
+
+echo "Applying: $TEMPLATE_NAME -> $TARGET_DIR"
 (cd "$SOURCE_DIR" && tar cf - .) | (cd "$TARGET_DIR" && tar xf -)
 
-echo "適用が完了しました。"
+# Merge with jq when merge was chosen
+if [[ $MERGE_SETTINGS -eq 1 ]] || [[ $MERGE_HOOKS -eq 1 ]]; then
+  if ! command -v jq &>/dev/null; then
+    echo ""
+    echo "Warning: jq is required for merging. Not installed; files were overwritten without merge."
+    echo "Install jq and run the script again if you want to merge."
+  else
+    if [[ $MERGE_SETTINGS -eq 1 ]]; then
+      jq -n --slurpfile t "$TMP_DIR/target_settings.json" --slurpfile s "$TARGET_DIR/.claude/settings.json" \
+        '($t[0] | .hooks.PostToolUse = (($t[0].hooks.PostToolUse // []) + ($s[0].hooks.PostToolUse // [])))' \
+        > "$TMP_DIR/merged_settings.json" && mv "$TMP_DIR/merged_settings.json" "$TARGET_DIR/.claude/settings.json"
+      echo "  Merged .claude/settings.json"
+    fi
+    if [[ $MERGE_HOOKS -eq 1 ]]; then
+      jq -n --slurpfile t "$TMP_DIR/target_hooks.json" --slurpfile s "$TARGET_DIR/.cursor/hooks.json" \
+        '($t[0] | .hooks.afterFileEdit = (($t[0].hooks.afterFileEdit // []) + ($s[0].hooks.afterFileEdit // [])))' \
+        > "$TMP_DIR/merged_hooks.json" && mv "$TMP_DIR/merged_hooks.json" "$TARGET_DIR/.cursor/hooks.json"
+      echo "  Merged .cursor/hooks.json"
+    fi
+  fi
+fi
+
+echo "Done."

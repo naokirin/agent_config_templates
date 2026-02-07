@@ -1,36 +1,34 @@
 # Agent Configuration Templates
 
-Claude / Cursor 向けのエージェント・コマンド・スキル・ルールのテンプレート集です。
+Templates for agents, commands, skills, and rules for Claude Code and Cursor.
 
-## テンプレート一覧
+## Templates
 
-| テンプレート名    | 説明           |
-|------------------|----------------|
-| `python`         | Python (pytest, ruff, mypy 等) |
-| `elixir`         | Elixir (ExUnit, Credo, format 等) |
-| `phoenix`        | Phoenix (Ecto, LiveView 等) |
-| `ruby_on_rails`  | Ruby on Rails (RSpec, RuboCop 等) |
-| `rust`           | Rust (clippy, rustfmt, cargo test 等) |
-| `typescript`     | TypeScript     |
-| `unity`          | Unity (C#)     |
+| Template        | Description |
+|-----------------|-------------|
+| `python`        | Python (pytest, ruff, mypy, etc.) |
+| `elixir`        | Elixir (ExUnit, Credo, format, etc.) |
+| `phoenix`       | Phoenix (Ecto, LiveView, etc.) |
+| `ruby_on_rails` | Ruby on Rails (RSpec, RuboCop, etc.) |
+| `rust`          | Rust (clippy, rustfmt, cargo test, etc.) |
+| `shellscript`   | Shell script (bats, shellcheck, shfmt) |
+| `typescript`    | TypeScript |
+| `unity`         | Unity (C#) |
 
-## 他リポジトリへの適用方法
+## Applying templates to another repository
 
-任意のリポジトリで、このテンプレートを **取得してその場で適用** するには、次のシェルスクリプトを使います。
+Use the script below to fetch and apply a template in any repository.
 
-### 1. スクリプトを取得して実行（推奨）
-
-リポジトリをクローンせず、スクリプトだけ取得して実行する例です。
+### 1. Download and run the script (recommended)
 
 ```bash
-# スクリプトをダウンロードして実行（TEMPLATE_NAME と TARGET_DIR を指定）
 curl -sL https://raw.githubusercontent.com/naokirin/agent_config_templates/main/apply-template.sh -o apply-template.sh
 chmod +x apply-template.sh
-./apply-template.sh python .          # カレントディレクトリに python テンプレートを適用
-./apply-template.sh python ./myproject # myproject に python テンプレートを適用
+./apply-template.sh python .              # Apply python template to current directory
+./apply-template.sh python ./myproject   # Apply python template to myproject
 ```
 
-### 2. このリポジトリをクローンして実行
+### 2. Clone this repository and run
 
 ```bash
 git clone https://github.com/naokirin/agent_config_templates.git
@@ -38,24 +36,38 @@ cd agent_config_templates
 ./apply-template.sh python /path/to/your/project
 ```
 
-### オプション
+### Options
 
-- **TEMPLATE_NAME**（必須）: 適用するテンプレート名（`python`, `elixir`, `phoenix`, `ruby_on_rails`, `rust`, `typescript`, `unity` のいずれか）
-- **TARGET_DIR**（任意）: 適用先ディレクトリ。省略時はカレントディレクトリ（`.`）
+- **TEMPLATE_NAME** (required): One of `python`, `elixir`, `phoenix`, `ruby_on_rails`, `rust`, `shellscript`, `typescript`, `unity`
+- **TARGET_DIR** (optional): Target directory; default is the current directory (`.`)
 
-### 既存ファイルがある場合
+### When files already exist
 
-適用先に同じ名前のファイルやディレクトリが既にある場合、上書きするかどうか確認プロンプトが表示されます。  
-`y` で上書き、それ以外で中止します。
+If files or directories with the same names already exist in the target, the script will prompt before overwriting. Answer `y` to overwrite, or anything else to abort.
 
-### ブランチの指定
+### Merging when applying multiple templates (.claude/settings.json and .cursor/hooks.json)
 
-デフォルトは `main` です。別ブランチを使う場合:
+Applying more than one template to the same directory causes these two files to conflict:
+
+- **`.claude/settings.json`** — Claude Code hook settings (e.g. PostToolUse)
+- **`.cursor/hooks.json`** — Cursor hook settings (e.g. afterFileEdit)
+
+When these files **already exist** and you run the script, it will ask:
+
+- **Merge with new template? [Y/n]**
+  - **Y** (or Enter): **Append** the new template’s settings to the existing ones. Existing hooks are kept and the new template’s hooks are added.
+  - **n**: **Overwrite** with the new template’s content.
+
+Merging is done with **jq**. If `jq` is not installed, the script cannot merge and will leave the overwritten content; install `jq` and run the script again to merge.
+
+### Branch
+
+Default branch is `main`. To use another branch:
 
 ```bash
 BRANCH=develop ./apply-template.sh python .
 ```
 
-## 各テンプレートの詳細
+## Template details
 
-各テンプレートの README を参照してください（例: `python/README.md`）。
+See each template’s README (e.g. `python/README.md`).
